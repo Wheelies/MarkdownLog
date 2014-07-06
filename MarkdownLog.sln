@@ -1,0 +1,28 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkdownLog", "MarkdownLog\MarkdownLog.csproj", "{58003E79-47E0-47D6-BF62-82051EFC1E8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{115E4845-076E-4615-9FA1-2FFEBE4D6042}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{58003E79-47E0-47D6-BF62-82051EFC1E8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58003E79-47E0-47D6-BF62-82051EFC1E8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58003E79-47E0-47D6-BF62-82051EFC1E8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58003E79-47E0-47D6-BF62-82051EFC1E8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{115E4845-076E-4615-9FA1-2FFEBE4D6042}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{115E4845-076E-4615-9FA1-2FFEBE4D6042}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{115E4845-076E-4615-9FA1-2FFEBE4D6042}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{115E4845-076E-4615-9FA1-2FFEBE4D6042}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
