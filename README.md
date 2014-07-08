@@ -73,6 +73,6 @@ Numbered list example
 
 
 
-The library was originally developed by BlackJet Software to output the results and observations of a fluent testing suite for an iOS application. The output of this suite included data structures that required manual inspection. The Markdown format was chosen because it can be produced and read without needing additional 3rd party libraries yet it is capable of representing rich data structures, such as lists, bar charts and tables, that can be easily converted into HTML for inclusion in professional quality reports.
+The library was originally developed by BlackJet Software to output the results and observations of a fluent testing suite for an [iOS application](http://shoppingukapp.com/). The output of this suite included data structures that required manual inspection. The Markdown format was chosen because it can be produced and read without needing additional 3rd party libraries yet it is capable of representing rich data structures, such as lists, bar charts and tables, that can be easily converted into HTML for inclusion in professional quality reports.
 
 MarkdownLog can produce all the standard Markdown features described in [John Gruber's original document](http://daringfireball.net/projects/markdown/); such as Headings, word-wrapped paragraphs, bulleted and numbered lists, blockquotes; in addition to GitHub flavoured tables, and representations of other data structures that are useful for outputting to diagnostic logs, such as bar charts and iOS style UIListView representations.
