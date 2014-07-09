@@ -3,8 +3,7 @@ MarkdownLog
 
 MarkdownLog is a .NET component for generating Markdown elements from common data structures. It can be used to provide diagnostic logs that are human readable in their raw form, yet capable of easily being transformed into HTML and other formats for reporting and documentation purposes. The binary is a lightweight (< 100KB), portable class library (PCL) DLL that requires no additional dependencies besides the .NET framework. 
 
-[Download latest binary](https://ci.appveyor.com/project/Wheelies/markdownlog/build/artifacts)  
-[View unit test results](https://ci.appveyor.com/project/Wheelies/markdownlog/build/tests)
+[![Build status](https://ci.appveyor.com/api/projects/status/k15974djmygb9f13)](https://ci.appveyor.com/project/Wheelies/markdownlog)
 
 Table example
 -------------
