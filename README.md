@@ -1,7 +1,9 @@
 MarkdownLog
 ===========
 
-MarkdownLog is a lightweight .NET portable class library (PCL) component, with minimal dependencies, designed to generate Markdown elements from common .NET data structures to aid testing and for logging diagnostic information for production code.
+MarkdownLog is a .NET component for generating Markdown elements from common data structures. It can be used to provide diagnostic logs that are human readable in their raw form, yet capable of easily being transformed into HTML and other formats for reporting and documentation purposes. The binary is a lightweight (< 100KB), portable class library (PCL) DLL that requires no additional dependencies besides the .NET framework. 
+
+[![Build status](https://ci.appveyor.com/api/projects/status/k15974djmygb9f13)](https://ci.appveyor.com/project/Wheelies/markdownlog)
 
 Table example
 -------------
@@ -76,3 +78,4 @@ Numbered list example
 The library was originally developed by BlackJet Software to output the results and observations of a fluent testing suite for an [iOS application](http://shoppingukapp.com/). The output of this suite included data structures that required manual inspection. The Markdown format was chosen because it can be produced and read without needing additional 3rd party libraries yet it is capable of representing rich data structures, such as lists, bar charts and tables, that can be easily converted into HTML for inclusion in professional quality reports.
 
 MarkdownLog can produce all the standard Markdown features described in [John Gruber's original document](http://daringfireball.net/projects/markdown/); such as Headings, word-wrapped paragraphs, bulleted and numbered lists, blockquotes; in addition to GitHub flavoured tables, and representations of other data structures that are useful for outputting to diagnostic logs, such as bar charts and iOS style UIListView representations.
+
