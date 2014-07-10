@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="BarChartTests.cs" />
     <Compile Include="BlockquoteTests.cs" />
+    <Compile Include="DocumentationExamples.cs" />
     <Compile Include="NumberExtensionsTests.cs" />
     <Compile Include="TableTests.cs" />
     <Compile Include="CodeBlockTests.cs" />
