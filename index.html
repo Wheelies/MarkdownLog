@@ -1,76 +1,122 @@
 <!DOCTYPE html>
 <html>
+
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <link href='https://fonts.googleapis.com/css?family=Chivo:900' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <title>Markdownlog by Wheelies</title>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="MarkdownLog : Lightweight .NET component for programmatically generating Markdown. Useful for producing rich diagnostic logs with minimal dependencies." />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>MarkdownLog</title>
   </head>
 
   <body>
-    <div id="container">
-      <div class="inner">
 
-        <header>
-          <h1>Markdownlog</h1>
-          <h2>Lightweight .NET component for programmatically generating Markdown. Useful for producing rich diagnostic logs with minimal dependencies.</h2>
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/Wheelies/MarkdownLog">View on GitHub</a>
+
+          <h1 id="project_title">MarkdownLog</h1>
+          <h2 id="project_tagline">Lightweight .NET component for programmatically generating Markdown. Useful for producing rich diagnostic logs with minimal dependencies.</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/Wheelies/MarkdownLog/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/Wheelies/MarkdownLog/tarball/master">Download this project as a tar.gz file</a>
+            </section>
         </header>
+    </div>
 
-        <section id="downloads" class="clearfix">
-          <a href="https://github.com/Wheelies/MarkdownLog/zipball/master" id="download-zip" class="button"><span>Download .zip</span></a>
-          <a href="https://github.com/Wheelies/MarkdownLog/tarball/master" id="download-tar-gz" class="button"><span>Download .tar.gz</span></a>
-          <a href="https://github.com/Wheelies/MarkdownLog" id="view-on-github" class="button"><span>View on GitHub</span></a>
-        </section>
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <p><a href="https://ci.appveyor.com/project/Wheelies/markdownlog"><img src="https://ci.appveyor.com/api/projects/status/k15974djmygb9f13" alt="Build status"></a></p>
 
-        <hr>
+<h2>
+<a name="table-example" class="anchor" href="#table-example"><span class="octicon octicon-link"></span></a>Table example</h2>
 
-        <section id="main_content">
-          <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+<pre><code>var data = new[]
+{
+    new{Year = 1991, Album = "Out of Time", Songs=11, Rating = "* * * *"},
+    new{Year = 1992, Album = "Automatic for the People", Songs=12, Rating = "* * * * *"},
+    new{Year = 1994, Album = "Monster", Songs=12, Rating = "* * *"}
+};
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+Console.Write(data.ToMarkdownTable().ToMarkdown());
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
+// Produces:
+//
+//     Year | Album                    | Songs | Rating   
+//     ----:| ------------------------ | -----:| --------- 
+//     1991 | Out of Time              |    11 | * * * *  
+//     1992 | Automatic for the People |    12 | * * * * *
+//     1994 | Monster                  |    12 | * * *    
 </code></pre>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+<h2>
+<a name="bar-chart-example" class="anchor" href="#bar-chart-example"><span class="octicon octicon-link"></span></a>Bar Chart example</h2>
 
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<pre><code>var worldCup = new Dictionary&lt;string, int&gt;
+{
+    {"Brazil", 5},
+    {"Italy", 4},
+    {"Germany", 3},
+    {"Argentina", 2},
+    {"Uruguay", 2},
+    {"France", 1},
+    {"Spain", 1},
+    {"England", 1}
+};
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+Console.Write(worldCup.ToMarkdownBarChart().ToMarkdown());
 
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
+// Produces:
+//
+//    Brazil    |#####  5
+//    Italy     |####  4
+//    Germany   |###  3
+//    Argentina |##  2
+//    Uruguay   |##  2
+//    France    |#  1
+//    Spain     |#  1
+//    England   |#  1
+//              ------
+</code></pre>
 
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
+<h2>
+<a name="numbered-list-example-" class="anchor" href="#numbered-list-example-"><span class="octicon octicon-link"></span></a>Numbered list example </h2>
 
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
+<pre><code>var planets = new[] { "Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"};
+Console.Write(planets.ToMarkdownNumberedList().ToMarkdown());
 
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
+// Produces:
+//
+//    1. Mercury
+//    2. Venus
+//    3. Earth
+//    4. Mars
+//    5. Jupiter
+//    6. Saturn
+//    7. Uranus
+//    8. Neptune
+</code></pre>
 
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
+<p>The library was originally developed by <a href="http://blackjetsoftware.com">BlackJet Software</a> to produce a report of performance test results for an <a href="http://shoppingukapp.com/">iOS application</a>. Markdown was chosen because it can be quickly produced and read without the need for additional 3rd party libraries yet, at the same time, it is capable of representing rich data structures, such as lists, bar charts and tables, that can be easily converted into HTML for inclusion in professional quality reports.</p>
 
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-        </section>
-
-        <footer>
-          Markdownlog is maintained by <a href="https://github.com/Wheelies">Wheelies</a><br>
-          This page was generated by <a href="http://pages.github.com">GitHub Pages</a>. Tactile theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.
-        </footer>
-
-        
-      </div>
+<p>MarkdownLog can produce all the standard Markdown features described in John Gruber's <a href="http://daringfireball.net/projects/markdown/">original spec</a>; such as headings, word-wrapped paragraphs, bulleted and numbered lists, block quotes; in addition to GitHub flavoured tables, and representations of other data structures that are useful for outputting to diagnostic logs, such as bar charts and iOS style UIListView representations.</p>
+      </section>
     </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">MarkdownLog maintained by <a href="https://github.com/Wheelies">Wheelies</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
   </body>
 </html>
