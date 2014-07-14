@@ -55,14 +55,14 @@ A collection can be output as a numbered list:
 
 When passed through a Markdown parser, this becomes:
 
-    1. Mercury
-    2. Venus
-    3. Earth
-    4. Mars
-    5. Jupiter
-    6. Saturn
-    7. Uranus
-    8. Neptune
+   1. Mercury
+   2. Venus
+   3. Earth
+   4. Mars
+   5. Jupiter
+   6. Saturn
+   7. Uranus
+   8. Neptune
 
 Alternatively, the list can have bullets:
 
@@ -115,7 +115,7 @@ A barchart can be produced from a collection of KeyValue or Tuple objects
     //    England   |#  1
     //              ------
 
-Bar charts are not supported by standard Markdown so when this is passed through a Markdown parser, the bar chart is rendered as a code block to retain its structure:
+Bar charts are not supported by standard Markdown. When a barchart is passed through a Markdown parser, it is rendered as a code block that retains its structure:
 
     Brazil    |#####  5
     Italy     |####  4
@@ -183,6 +183,11 @@ Strings can be written as a word-wrapped paragraph:
     // of the tongue taking a trip of three steps down the palate to tap, at three, on 
     // the teeth. Lo. Lee. Ta.
 
+After parsing, this becomes:
+
+Lolita, light of my life, fire of my loins. My sin, my soul. Lo-lee-ta: the tip 
+of the tongue taking a trip of three steps down the palate to tap, at three, on 
+the teeth. Lo. Lee. Ta.
 
 --
 
