@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MarkdownLog
 {
-    public class TableView : IMarkdownElement
+    public class TableView : MarkdownElement
     {
         private IEnumerable<TableViewSection> _sections = new List<TableViewSection>();
 
@@ -24,7 +24,7 @@ namespace MarkdownLog
             set { _sections = value ?? Enumerable.Empty<TableViewSection>(); }
         }
 
-        public string ToMarkdown()
+        public override string ToMarkdown()
         {
             var builder = new StringBuilder();
             var indent = new string(' ', 4);

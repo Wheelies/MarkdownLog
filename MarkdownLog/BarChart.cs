@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MarkdownLog
 {
-    public class BarChart : IMarkdownElement
+    public class BarChart : MarkdownElement
     {
         private IEnumerable<BarChartDataPoint> _dataPoints = new List<BarChartDataPoint>();
         private int _maximumChartWidth = 80;
@@ -31,7 +31,7 @@ namespace MarkdownLog
             set { _dataPoints = value ?? Enumerable.Empty<BarChartDataPoint>(); }
         }
 
-        public string ToMarkdown()
+        public override string ToMarkdown()
         {
             if (!_dataPoints.Any()) return "";
 

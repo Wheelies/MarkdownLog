@@ -40,6 +40,7 @@
     <Compile Include="CodeBlock.cs" />
     <Compile Include="ITableCell.cs" />
     <Compile Include="EmptyTableCell.cs" />
+    <Compile Include="MarkdownElement.cs" />
     <Compile Include="MarkdownToHtmlConverter.cs" />
     <Compile Include="MarkdownToHtmlExtensions.cs" />
     <Compile Include="NumberExtensions.cs" />

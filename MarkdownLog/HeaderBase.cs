@@ -2,7 +2,7 @@
 
 namespace MarkdownLog
 {
-    public abstract class HeaderBase : IMarkdownElement
+    public abstract class HeaderBase : MarkdownElement
     {
         private readonly char _underlineChar;
         private readonly string _text = "";
@@ -13,7 +13,7 @@ namespace MarkdownLog
             _underlineChar = underlineChar;
         }
 
-        public string ToMarkdown()
+        public override string ToMarkdown()
         {
             var builder = new StringBuilder();
 

@@ -3,7 +3,7 @@ using System.Text;
 
 namespace MarkdownLog
 {
-    public class CodeBlock : IMarkdownElement
+    public class CodeBlock : MarkdownElement
     {
         private readonly StringBuilder _builder = new StringBuilder();
 
@@ -32,8 +32,8 @@ namespace MarkdownLog
             text = text ?? "";
             _builder.Append(text);
         }
-        
-        public string ToMarkdown()
+
+        public override string ToMarkdown()
         {
             return _builder.ToString().PrependAllLines("    ").TrimEnd(' ');
         }

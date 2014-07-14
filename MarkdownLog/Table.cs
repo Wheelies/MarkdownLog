@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MarkdownLog
 {
-    public class Table : IMarkdownElement
+    public class Table : MarkdownElement
     {
         private static readonly EmptyTableCell EmptyCell = new EmptyTableCell();
 
@@ -24,7 +24,7 @@ namespace MarkdownLog
             set { _columns = value ?? new List<TableColumn>(); }
         }
 
-        public string ToMarkdown()
+        public override string ToMarkdown()
         {
             var markdownBuilder = new MarkdownBuilder(this);
             return markdownBuilder.Build();

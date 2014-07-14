@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MarkdownLog
 {
-    public abstract class ListBase : IMarkdownElement
+    public abstract class ListBase : MarkdownElement
     {
         private readonly IEnumerable<ListItem> _items = new List<ListItem>();
         private int _wordWrapColumn;
@@ -31,7 +31,7 @@ namespace MarkdownLog
             set { _wordWrapColumn = Math.Max(0, value); }
         }
 
-        public string ToMarkdown()
+        public override string ToMarkdown()
         {
             var builder = new StringBuilder();
 

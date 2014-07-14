@@ -1,6 +1,6 @@
 namespace MarkdownLog
 {
-    internal class ListItem : IMarkdownElement
+    internal class ListItem : MarkdownElement
     {
         private string _markdown = "";
 
@@ -10,7 +10,7 @@ namespace MarkdownLog
             return new ListItem{_markdown = text.EscapeMarkdownCharacters()};
         }
 
-        public string ToMarkdown()
+        public override string ToMarkdown()
         {
             return _markdown;
         }

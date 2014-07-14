@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace MarkdownLog
 {
-    public class Paragraph : IMarkdownElement
+    public class Paragraph : MarkdownElement
     {
         private readonly string _text;
         private int _wordWrapColumn;
@@ -27,7 +27,7 @@ namespace MarkdownLog
             set { _wordWrapColumn = Math.Max(0, value); }
         }
 
-        public string ToMarkdown()
+        public override string ToMarkdown()
         {
             var originalLines = _text.SplitByLine();
             var linesWithoutFinalEmptyLine = (originalLines.Last() == "")

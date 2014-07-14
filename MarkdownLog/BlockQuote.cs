@@ -3,7 +3,7 @@ using System.Text;
 
 namespace MarkdownLog
 {
-    public class Blockquote : IMarkdownElement
+    public class Blockquote : MarkdownElement
     {
         private readonly StringBuilder _builder = new StringBuilder();
 
@@ -45,7 +45,7 @@ namespace MarkdownLog
             _builder.Append(element.ToMarkdown().PrependAllLines("> "));
         }
 
-        public string ToMarkdown()
+        public override string ToMarkdown()
         {
             return _builder + Environment.NewLine;
         }

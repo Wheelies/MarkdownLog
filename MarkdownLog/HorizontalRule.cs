@@ -2,9 +2,9 @@
 
 namespace MarkdownLog
 {
-    public class HorizontalRule : IMarkdownElement
+    public class HorizontalRule : MarkdownElement
     {
-        public string ToMarkdown()
+        public override string ToMarkdown()
         {
             return new string('-', 80) + Environment.NewLine;
         }

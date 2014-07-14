@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace MarkdownLog
 {
-    public class MarkdownContainer : IMarkdownElement
+    public class MarkdownContainer : MarkdownElement
     {
         private readonly List<IMarkdownElement> _elements = new List<IMarkdownElement>();
 
@@ -13,7 +13,7 @@ namespace MarkdownLog
             _elements.Add(element);
         }
 
-        public string ToMarkdown()
+        public override string ToMarkdown()
         {
             return string.Join(Environment.NewLine, _elements.Select(i => i.ToMarkdown()));
         }

@@ -1,6 +1,6 @@
 ﻿namespace MarkdownLog
 {
-    public class RawMarkdown : IMarkdownElement
+    public class RawMarkdown : MarkdownElement
     {
         private readonly string _markdown;
 
@@ -9,7 +9,7 @@
             _markdown = markdown ?? "";
         }
 
-        public string ToMarkdown()
+        public override string ToMarkdown()
         {
             return _markdown;
         }
