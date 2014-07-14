@@ -189,6 +189,6 @@ Lolita, light of my life, fire of my loins. My sin, my soul. Lo-lee-ta: the tip
 of the tongue taking a trip of three steps down the palate to tap, at three, on 
 the teeth. Lo. Lee. Ta.
 
---
+---
 
 MarkdownLog was originally developed by [BlackJet Software](http://blackjetsoftware.com) to produce a report of performance test results for an [iOS application](http://shoppingukapp.com/). It is maintained by [Wheelies](https://github.com/Wheelies)
