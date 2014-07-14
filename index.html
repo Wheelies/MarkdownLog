@@ -33,8 +33,14 @@
       <section id="main_content" class="inner">
         <p><a href="https://ci.appveyor.com/project/Wheelies/markdownlog"><img src="https://ci.appveyor.com/api/projects/status/k15974djmygb9f13" alt="Build status"></a></p>
 
+<p>Markdown is a great format for representing an application's internal data structures for debugging and diagnostic purposes. It is a flexible format that is readable in its raw form yet capable of being transformed into HTML for documentation or reporting.</p>
+
+<p>MarkdownLog can produce all features described in John Gruber's <a href="http://daringfireball.net/projects/markdown/">original spec</a> from common .NET types.</p>
+
 <h2>
-<a name="table-example" class="anchor" href="#table-example"><span class="octicon octicon-link"></span></a>Table example</h2>
+<a name="tables" class="anchor" href="#tables"><span class="octicon octicon-link"></span></a>Tables</h2>
+
+<p>This is how a table is built from a List of objects:</p>
 
 <pre><code>var data = new[]
 {
@@ -43,7 +49,7 @@
     new{Year = 1994, Album = "Monster", Songs=12, Rating = "* * *"}
 };
 
-Console.Write(data.ToMarkdownTable().ToMarkdown());
+Console.Write(data.ToMarkdownTable());
 
 // Produces:
 //
@@ -54,41 +60,42 @@ Console.Write(data.ToMarkdownTable().ToMarkdown());
 //     1994 | Monster                  |    12 | * * *    
 </code></pre>
 
-<h2>
-<a name="bar-chart-example" class="anchor" href="#bar-chart-example"><span class="octicon octicon-link"></span></a>Bar Chart example</h2>
+<p>Once passed through a GitHub-flavoured parser, you get a HTML table, complete with headings and alignments:</p>
 
-<pre><code>var worldCup = new Dictionary&lt;string, int&gt;
-{
-    {"Brazil", 5},
-    {"Italy", 4},
-    {"Germany", 3},
-    {"Argentina", 2},
-    {"Uruguay", 2},
-    {"France", 1},
-    {"Spain", 1},
-    {"England", 1}
-};
+<table>
+<thead><tr>
+<th align="right">Year</th>
+<th>Album</th>
+<th align="right">Songs</th>
+<th>Rating</th>
+</tr></thead>
+<tbody>
+<tr>
+<td align="right">1991</td>
+<td>Out of Time</td>
+<td align="right">11</td>
+<td>* * * *</td>
+</tr>
+<tr>
+<td align="right">1992</td>
+<td>Automatic for the People</td>
+<td align="right">12</td>
+<td>* * * * *</td>
+</tr>
+<tr>
+<td align="right">1994</td>
+<td>Monster</td>
+<td align="right">12</td>
+<td>* * *</td>
+</tr>
+</tbody>
+</table><h2>
+<a name="lists" class="anchor" href="#lists"><span class="octicon octicon-link"></span></a>Lists</h2>
 
-Console.Write(worldCup.ToMarkdownBarChart().ToMarkdown());
-
-// Produces:
-//
-//    Brazil    |#####  5
-//    Italy     |####  4
-//    Germany   |###  3
-//    Argentina |##  2
-//    Uruguay   |##  2
-//    France    |#  1
-//    Spain     |#  1
-//    England   |#  1
-//              ------
-</code></pre>
-
-<h2>
-<a name="numbered-list-example-" class="anchor" href="#numbered-list-example-"><span class="octicon octicon-link"></span></a>Numbered list example </h2>
+<p>A collection can be output as a numbered list:</p>
 
 <pre><code>var planets = new[] { "Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"};
-Console.Write(planets.ToMarkdownNumberedList().ToMarkdown());
+Console.Write(planets.ToMarkdownNumberedList());
 
 // Produces:
 //
@@ -102,9 +109,147 @@ Console.Write(planets.ToMarkdownNumberedList().ToMarkdown());
 //    8. Neptune
 </code></pre>
 
-<p>The library was originally developed by <a href="http://blackjetsoftware.com">BlackJet Software</a> to produce a report of performance test results for an <a href="http://shoppingukapp.com/">iOS application</a>. Markdown was chosen because it can be quickly produced and read without the need for additional 3rd party libraries yet, at the same time, it is capable of representing rich data structures, such as lists, bar charts and tables, that can be easily converted into HTML for inclusion in professional quality reports.</p>
+<p>When passed through a Markdown parser, this becomes:</p>
 
-<p>MarkdownLog can produce all the standard Markdown features described in John Gruber's <a href="http://daringfireball.net/projects/markdown/">original spec</a>; such as headings, word-wrapped paragraphs, bulleted and numbered lists, block quotes; in addition to GitHub flavoured tables, and representations of other data structures that are useful for outputting to diagnostic logs, such as bar charts and iOS style UIListView representations.</p>
+<ol>
+<li>Mercury</li>
+<li>Venus</li>
+<li>Earth</li>
+<li>Mars</li>
+<li>Jupiter</li>
+<li>Saturn</li>
+<li>Uranus</li>
+<li>Neptune</li>
+</ol><p>Alternatively, the list can have bullets:</p>
+
+<pre><code>var beatles = new[] { "John", "Paul", "Ringo", "George" };
+Console.Write(beatles.ToMarkdownBulettedList());
+
+//Produces:
+//
+//   * John
+//   * Paul
+//   * Ringo
+//   * George
+</code></pre>
+
+<p>This is parsed to:</p>
+
+<ul>
+<li>John</li>
+<li>Paul</li>
+<li>Ringo</li>
+<li>George</li>
+</ul><h2>
+<a name="bar-chart-example" class="anchor" href="#bar-chart-example"><span class="octicon octicon-link"></span></a>Bar Chart example</h2>
+
+<p>A barchart can be produced from a collection of KeyValue or Tuple objects</p>
+
+<pre><code>var worldCup = new Dictionary&lt;string, int&gt;
+{
+    {"Brazil", 5},
+    {"Italy", 4},
+    {"Germany", 4},
+    {"Argentina", 2},
+    {"Uruguay", 2},
+    {"France", 1},
+    {"Spain", 1},
+    {"England", 1}
+};
+
+Console.Write(worldCup.ToMarkdownBarChart());
+
+// Produces:
+//
+//    Brazil    |#####  5
+//    Italy     |####  4
+//    Germany   |####  4
+//    Argentina |##  2
+//    Uruguay   |##  2
+//    France    |#  1
+//    Spain     |#  1
+//    England   |#  1
+//              ------
+</code></pre>
+
+<p>Bar charts are not supported by standard Markdown. When a barchart is passed through a Markdown parser, it is rendered as a code block that retains its structure:</p>
+
+<pre><code>Brazil    |#####  5
+Italy     |####  4
+Germany   |####  4
+Argentina |##  2
+Uruguay   |##  2
+France    |#  1
+Spain     |#  1
+England   |#  1
+          ------
+</code></pre>
+
+<p>A bar chart can be produced from floating point and negative numbers and scaling can be applied as desired:</p>
+
+<pre><code>const int valueCount = 20;
+var chart = new BarChart
+{
+    ScaleAlways = true,
+    MaximumChartWidth = 40,
+    DataPoints = from i in Enumerable.Range(0, valueCount)
+        let rad = (i * 2.0 * Math.PI) / valueCount
+        select new BarChartDataPoint
+        {
+            CategoryName = string.Format("Cos({0:0.0})", rad),
+            Value = Math.Cos(rad)
+        }
+};
+</code></pre>
+
+<p>This produces:</p>
+
+<pre><code>Cos(0.0)                     |####################  1
+Cos(0.3)                     |###################  0.95
+Cos(0.6)                     |################  0.81
+Cos(0.9)                     |############  0.59
+Cos(1.3)                     |######  0.31
+Cos(1.6)                     |  0
+Cos(1.9)               ######|  -0.31
+Cos(2.2)         ############|  -0.59
+Cos(2.5)     ################|  -0.81
+Cos(2.8)  ###################|  -0.95
+Cos(3.1) ####################|  -1
+Cos(3.5)  ###################|  -0.95
+Cos(3.8)     ################|  -0.81
+Cos(4.1)         ############|  -0.59
+Cos(4.4)               ######|  -0.31
+Cos(4.7)                     |  0
+Cos(5.0)                     |######  0.31
+Cos(5.3)                     |############  0.59
+Cos(5.7)                     |################  0.81
+Cos(6.0)                     |###################  0.95
+         -----------------------------------------
+</code></pre>
+
+<h2>
+<a name="paragraphs" class="anchor" href="#paragraphs"><span class="octicon octicon-link"></span></a>Paragraphs</h2>
+
+<p>Strings can be written as a word-wrapped paragraph:</p>
+
+<pre><code>var text ="Lolita, light of my life, fire of my loins. My sin, my soul. Lo-lee-ta: the tip of the tongue taking a trip of three steps down the palate to tap, at three, on the teeth. Lo. Lee. Ta.";
+
+Console.Write(text.ToMarkdownParagraph());
+
+// Produces:
+//
+// Lolita, light of my life, fire of my loins. My sin, my soul. Lo-lee-ta: the tip 
+// of the tongue taking a trip of three steps down the palate to tap, at three, on 
+// the teeth. Lo. Lee. Ta.
+</code></pre>
+
+<p>After parsing, this becomes:</p>
+
+<p>Lolita, light of my life, fire of my loins. My sin, my soul. Lo-lee-ta: the tip 
+of the tongue taking a trip of three steps down the palate to tap, at three, on 
+the teeth. Lo. Lee. Ta.</p>
+
+<hr><p>MarkdownLog was originally developed by <a href="http://blackjetsoftware.com">BlackJet Software</a> to produce a report of performance test results for an <a href="http://shoppingukapp.com/">iOS application</a>. It is maintained by <a href="https://github.com/Wheelies">Wheelies</a></p>
       </section>
     </div>
 
