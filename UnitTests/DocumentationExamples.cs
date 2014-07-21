@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using MarkdownLog;
@@ -137,19 +136,39 @@ namespace UnitTests.MarkdownLog
         }
 
         [TestMethod]
-        public void TestListWithCustomProperty()
-        {
-            Process.GetProcesses().ToMarkdownBulletedList(i => i.ProcessName);
-
-            new DirectoryInfo(@"C:\").EnumerateFiles().ToMarkdownNumberedList(i => i.Name + " is " + i.Length + "bytes");
-        }
-
-
-        [TestMethod]
-        public void Headers()
+        public void HeaderExamples()
         {
             Console.Write("The Origin of the Species".ToMarkdownHeader());
             Console.Write("By Means of Natural Selection".ToMarkdownSubHeader());
+        }
+
+        [TestMethod]
+        public void BlockquoteExample()
+        {
+            const string text = "There are only two hard things in computer science:\n" +
+                                "cache invalidation,\n" +
+                                "naming things,\n" +
+                                "and off-by-one errors.";
+
+            Console.Write(text.ToMarkdownBlockquote());
+        }
+
+        [TestMethod]
+        public void ContainerExample()
+        {
+            var log = new MarkdownContainer();
+
+            var countries = new[]{"Zimbabwe", "Italy", "Bolivia", "Finland", "Australia"};
+
+            log.Append("Countries (unsorted)".ToMarkdownHeader());
+            log.Append(countries.ToMarkdownNumberedList());
+
+            var sorted = countries.OrderBy(i => i);
+
+            log.Append("Countries (sorted)".ToMarkdownHeader());
+            log.Append(sorted.ToMarkdownNumberedList());
+
+            Console.Write(log);
         }
     }
 }

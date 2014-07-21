@@ -1,4 +1,4 @@
-[![Build status](https://ci.appveyor.com/api/projects/status/k15974djmygb9f13)](https://ci.appveyor.com/project/Wheelies/markdownlog)
+[![Build status](https://ci.appveyor.com/api/projects/status/utok6islevjr35le)](https://ci.appveyor.com/project/Wheelies/markdownlog)
 
 Markdown is a great format for representing an application's internal data structures for debugging and diagnostic purposes. It is a flexible format that is readable in its raw form yet capable of being transformed into HTML for documentation or reporting.
 
