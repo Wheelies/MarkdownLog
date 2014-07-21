@@ -72,13 +72,6 @@ namespace UnitTests.MarkdownLog
         }
 
         [TestMethod]
-        public void NumberedListExample2()
-        {
-            var files = new DirectoryInfo(@"C:\MarkdownLog").EnumerateFiles();
-            Console.Write(files.ToMarkdownNumberedList(i => i.Name + " is " + i.Length + "bytes"));
-        }
-
-        [TestMethod]
         public void BarChartExample()
         {
             var worldCup = new Dictionary<string, int>
