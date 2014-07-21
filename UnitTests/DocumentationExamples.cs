@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using MarkdownLog;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -64,10 +66,17 @@ namespace UnitTests.MarkdownLog
         }
 
         [TestMethod]
-        public void BulettedListExample()
+        public void BulletedListExample()
         {
             var beatles = new[] { "John", "Paul", "Ringo", "George" };
-            Console.Write(beatles.ToMarkdownBulettedList());
+            Console.Write(beatles.ToMarkdownBulletedList());
+        }
+
+        [TestMethod]
+        public void NumberedListExample2()
+        {
+            var files = new DirectoryInfo(@"C:\MarkdownLog").EnumerateFiles();
+            Console.Write(files.ToMarkdownNumberedList(i => i.Name + " is " + i.Length + "bytes"));
         }
 
         [TestMethod]
@@ -106,6 +115,41 @@ namespace UnitTests.MarkdownLog
             };
 
             chart.WriteToTrace();
+        }
+
+        [TestMethod]
+        public void TableExample2()
+        {
+            var data = new[]
+            {
+                new {Name = "Meryl Streep", Nominations = 18, Awards = 3},
+                new {Name = "Katharine Hepburn", Nominations = 12, Awards = 4},
+                new {Name = "Jack Nicholson", Nominations = 12, Awards = 3}
+            };
+
+            Console.Write(data.ToMarkdownTable());
+
+            var tableWithHeaders = data
+                .ToMarkdownTable(i => i.Name, i => i.Nominations + i.Awards)
+                .WithHeaders("Name", "Total");
+
+            Console.Write(tableWithHeaders);
+        }
+
+        [TestMethod]
+        public void TestListWithCustomProperty()
+        {
+            Process.GetProcesses().ToMarkdownBulletedList(i => i.ProcessName);
+
+            new DirectoryInfo(@"C:\").EnumerateFiles().ToMarkdownNumberedList(i => i.Name + " is " + i.Length + "bytes");
+        }
+
+
+        [TestMethod]
+        public void Headers()
+        {
+            Console.Write("The Origin of the Species".ToMarkdownHeader());
+            Console.Write("By Means of Natural Selection".ToMarkdownSubHeader());
         }
     }
 }

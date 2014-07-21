@@ -52,12 +52,12 @@ namespace MarkdownLog
             return new NumberedList(items.Select(toText));
         }
 
-        public static BulletedList ToMarkdownBulettedList<T>(this IEnumerable<T> items)
+        public static BulletedList ToMarkdownBulletedList<T>(this IEnumerable<T> items)
         {
-            return items.ToMarkdownBulettedList(i => i.ToString());
+            return items.ToMarkdownBulletedList(i => i.ToString());
         }
 
-        public static BulletedList ToMarkdownBulettedList<T>(this IEnumerable<T> items, Func<T, string> toText)
+        public static BulletedList ToMarkdownBulletedList<T>(this IEnumerable<T> items, Func<T, string> toText)
         {
             return new BulletedList(items.Select(toText));
         }

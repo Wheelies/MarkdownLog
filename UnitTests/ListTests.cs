@@ -97,9 +97,9 @@ namespace UnitTests.MarkdownLog
         public void TestCanProduceListFromAnyEnumerable()
         {
             "Mathematical constants".ToMarkdownHeader().WriteToTrace();
-            new[] {3.14, 2.718, 1.618, 0.577215}.ToMarkdownBulettedList().WriteToTrace();
+            new[] {3.14, 2.718, 1.618, 0.577215}.ToMarkdownBulletedList().WriteToTrace();
 
-            new[] { "John", "Paul", "Ringo", "George" }.ToMarkdownBulettedList().WriteToTrace();
+            new[] { "John", "Paul", "Ringo", "George" }.ToMarkdownBulletedList().WriteToTrace();
 
             new[] { "Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune" }.ToMarkdownNumberedList().WriteToTrace();
         }
