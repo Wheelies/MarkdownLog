@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="GetNuget">
+
+  <!--
+  This is an MSBuild snippet that can be used to download nuget to the path
+  in the property NuGetExePath property.
+  
+  Usage:
+   1. Copy and paste this into your build script
+   2. Call the GetNuGet target before you use nuget.exe from $(NuGetExePath)
+  -->
+
+  <PropertyGroup>
+    <NuGetExePath Condition=" '$(NuGetExePath)'=='' ">$(localappdata)\LigerShark\tools\nuget.exe</NuGetExePath>
+    <NuGetDownloadUrl Condition=" '$(NuGetDownloadUrl)'=='' ">http://nuget.org/nuget.exe</NuGetDownloadUrl>
+  </PropertyGroup>
+
+  <Target Name="GetNuget" Condition="!Exists('$(NuGetExePath)')">
+    <Message Text="Downloading nuget from [$(NuGetDownloadUrl)] to [$(NuGetExePath)]" Importance="high"/>
+    <ItemGroup>
+      <_nugetexeitem Include="$(NuGetExePath)" />
+    </ItemGroup>
+    <MakeDir Directories="@(_nugetexeitem->'%(RootDir)%(Directory)')"/>
+    <DownloadFile
+        Address="$(NuGetDownloadUrl)"
+        FileName="$(NuGetExePath)" />
+  </Target>
+
+  <PropertyGroup Condition=" '$(ls-msbuildtasks-path)'=='' ">
+    <ls-msbuildtasks-path>$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll</ls-msbuildtasks-path>
+    <ls-msbuildtasks-path Condition=" !Exists('$(ls-msbuildtasks-path)')">$(MSBuildFrameworkToolsPath)\Microsoft.Build.Tasks.v4.0.dll</ls-msbuildtasks-path>
+    <ls-msbuildtasks-path Condition=" !Exists('$(ls-msbuildtasks-path)')">$(windir)\Microsoft.NET\Framework\v4.0.30319\Microsoft.Build.Tasks.v4.0.dll</ls-msbuildtasks-path>
+  </PropertyGroup>
+
+  <UsingTask TaskName="DownloadFile" TaskFactory="CodeTaskFactory" AssemblyFile="$(ls-msbuildtasks-path)">
+    <!-- http://stackoverflow.com/a/12739168/105999 -->
+    <ParameterGroup>
+      <Address ParameterType="System.String" Required="true"/>
+      <FileName ParameterType="System.String" Required="true" />
+    </ParameterGroup>
+    <Task>
+      <Reference Include="System" />
+      <Code Type="Fragment" Language="cs">
+        <![CDATA[
+            new System.Net.WebClient().DownloadFile(Address, FileName);
+        ]]>
+      </Code>
+    </Task>
+  </UsingTask>
+
+</Project>

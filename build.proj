@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="FullBuild">
+  <PropertyGroup>
+    <Root>$(MSBuildThisFileDirectory)</Root>
+    <SourceRoot Condition=" '$(SourceRoot)'=='' ">$(Root)</SourceRoot>
+    <OutputRootNoTrailingSlash Condition=" '$(OutputRoot)'=='' ">$(Root)OutputRoot</OutputRootNoTrailingSlash>
+    <OutputRoot Condition=" '$(OutputRoot)'=='' ">$(OutputRootNoTrailingSlash)\</OutputRoot>
+    <MarkdownLogBin Condition=" '$(Bin)'=='' ">$(OutputRoot)MarkdownLog\</MarkdownLogBin>
+    <NugetLocalRepo Condition=" '$(NugetLocalRepo)'=='' ">C:\Temp\Nuget\LocalRepo\</NugetLocalRepo>
+    <Configuration Condition=" '$(Configuration)'=='' ">Release</Configuration>
+    <MarkdownLogSourceRoot Condition=" ''=='' ">$(SourceRoot)MarkdownLog\</MarkdownLogSourceRoot>
+    <!-- nuget settings -->
+    <NuspecFile Condition=" '$(NuspecFile)'=='' ">$(MSBuildThisProjectDirectory)markdownlog.nuspec</NuspecFile>
+    <NugetSourceRoot Condition=" ''=='' ">$(MarkdownLogSourceRoot)</NugetSourceRoot>
+    <NugetOutputRoot Condition=" '$(NugetOutputRoot)'=='' ">$(OutputRoot)_nuget-markdownlog\</NugetOutputRoot>
+    <NugetIncludePdbs Condition=" '$(NugetIncludePdbs)'=='' ">false</NugetIncludePdbs>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectsToBuild Include="$(SourceRoot)MarkdownLog\MarkdownLog.csproj">
+      <AdditionalProperties>OutputPath=$(MarkdownLogBin);Configuration=$(Configuration)</AdditionalProperties>
+    </ProjectsToBuild>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <FullBuildDependsOn>
+      BuildProjects;
+      CreateNugetPackage
+    </FullBuildDependsOn>
+    <BuildProjectsDependsOn>
+      CoreBuildProjects;
+    </BuildProjectsDependsOn>
+    <CreateNugetPackageDependsOn>
+      GetNuget;
+      GatherNuGetFiles;
+      PrepareAndPopulateNugetFolder;
+      CoreCreateNugetPackage;
+    </CreateNugetPackageDependsOn>
+  </PropertyGroup>
+  <Target Name="FullBuild" DependsOnTargets="$(FullBuildDependsOn)"/>
+  <Target Name="BuildProjects" DependsOnTargets="$(BuildProjectsDependsOn)"/>
+
+  <Target Name="CoreBuildProjects">
+    <Message Text="Building projects now [@(ProjectsToBuild)]" Importance="high"/>
+    <MSBuild Projects="@(ProjectsToBuild)"/>
+  </Target>
+
+  <Target Name="GatherNuGetFiles">
+    <Message Text="NugetOutputRoot: [$(NugetOutputRoot)]" Importance="high"/>
+    <ItemGroup>
+      <!-- This item should never have more than 1 value -->
+      <_NugetSpecFile Include="$(NuspecFile)" />
+
+      <!-- Standard declarations -->
+      <LibItems Include="$(MarkdownLogBin)NuGet\lib\**\*" />
+      <ContentItems Include="$(MarkdownLogBin)NuGet\content\**\*"/>
+      <ToolsItems Include="$(MarkdownLogBin)NuGet\tools\**\*" />
+      
+      <LibItems Include="$(MarkdownLogBin)*.dll"/>
+      <LibItems Include="$(MarkdownLogBin)*.pdb" Condition=" '$(NugetIncludePdbs)'=='true' "/>
+    </ItemGroup>
+  </Target>
+
+  <Target Name="CreateNugetPackage" DependsOnTargets="$(CreateNugetPackageDependsOn)" />
+
+  <Target Name="CoreCreateNugetPackage" DependsOnTargets="GetNuget">
+    <Message Text="
+OutputRoot: $(OutputRoot)
+NugetSourceRoot: $(NugetSourceRoot)" Importance="low"/>
+
+    <PropertyGroup>
+      <_NugetSpecFile>%(_NugetSpecOutputFile.FullPath)</_NugetSpecFile>
+      <_Cmd>"$(NuGetExePath)" pack "$(_NugetSpecFile)" -NoPackageAnalysis -OutputDirectory "$(OutputRootNoTrailingSlash)" </_Cmd>
+    </PropertyGroup>
+
+    <Message Text="_Cmd: $(_Cmd)" Importance="low" />
+    <Exec Command="$(_Cmd)"/>
+
+    <ItemGroup>
+      <_CreatedPackage Include="$(OutputRoot)*.nupkg"/>
+    </ItemGroup>
+
+    <Copy SourceFiles="@(_CreatedPackage)"
+          DestinationFiles="@(_CreatedPackage->'$(NugetLocalRepo)%(Filename)%(Extension)')"
+          Condition="Exists('$(NugetLocalRepo)')"/>
+  </Target>
+
+  <Target Name="PrepareAndPopulateNugetFolder">
+    <Copy SourceFiles="@(_NugetSpecFile)"
+          DestinationFiles="@(_NugetSpecFile->'$(NugetOutputRoot)%(Filename)%(Extension)')">
+      <Output ItemName="_NugetSpecOutputFile" TaskParameter="DestinationFiles"/>
+    </Copy>
+    <Message Text="ToolsItems: [@(ToolsItems)]
+ContentItems : [@(ContentItems)]
+LibItems : [@(LibItems)]
+NuGetRootItems : [@(NuGetRootItems)]" Importance="low"/>
+
+    <Copy SourceFiles="@(ToolsItems)"
+          DestinationFiles="@(ToolsItems->'$(NugetOutputRoot)tools\%(DestDir)%(Filename)%(Extension)')"/>
+
+    <Copy SourceFiles="@(ContentItems)"
+          DestinationFiles="@(ContentItems->'$(NugetOutputRoot)content\%(DestDir)%(Filename)%(Extension)')"/>
+    <Copy SourceFiles="@(LibItems)"
+          DestinationFiles="@(LibItems->'$(NugetOutputRoot)lib\%(DestDir)%(Filename)%(Extension)')"/>
+
+    <Copy SourceFiles="@(NuGetRootItems)"
+          DestinationFiles="@(NuGetRootItems->'$(NugetOutputRoot)%(DestDir)%(Filename)%(Extension)')" />
+  </Target>
+
+  <Import Project="getnuget.targets"/>
+
+  <PropertyGroup>
+    <RebuildDependsOn>
+      $(RebuildDependsOn);
+      Clean;
+      FullBuild;
+    </RebuildDependsOn>
+  </PropertyGroup>
+  <Target Name="Rebuild" DependsOnTargets="$(RebuildDependsOn)"/>
+  <Target Name="Clean">
+    <!-- delete the OutputRoot folder -->
+    <RemoveDir Directories="$(OutputRoot)" Condition=" '$(OutputRoot)' != '' "/>
+  </Target>
+</Project>
