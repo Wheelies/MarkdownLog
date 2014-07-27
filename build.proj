@@ -1,5 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="FullBuild">
+  
+  <!--
+  This script can be used to build the MarkdownLog project and it's nuget package.
+  When you run this the output will be placed in .\OutputRoot\ by default.
+  
+  Significant Targets:
+    FullBuild => Run the entire process (excluding Clean)
+    BuildProjects => Build the source projects
+    CreateNugetPackage => Creates the nuget package
+    Clean => Removes the files from the previous build
+  
+  Significant properties:
+    Configuration => build config
+    OutputRoot / OutputRootNoTrailingSlash => location where output folder is rooted
+    NugetLocalRepo => folder where the .nupkg files will be copied to
+    NugetIncludePdbs => set to true to include .pdb files into the .nupkg file
+  -->
   <PropertyGroup>
     <Root>$(MSBuildThisFileDirectory)</Root>
     <SourceRoot Condition=" '$(SourceRoot)'=='' ">$(Root)</SourceRoot>
