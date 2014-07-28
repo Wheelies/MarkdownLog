@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- 
+  For more info on this file format visit http://docs.nuget.org/docs/reference/nuspec-reference.
+-->
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">  
+  <metadata>
+    <id>MarkdownLog</id>
+    <version>0.0.1-beta</version>
+    <authors>Stuart Wheelwright, Sayed Ibrahim Hashimi</authors>
+    <description>
+      NuGet package for MarkdownLog
+    </description>
+    
+    <language>en-US</language>
+    <projectUrl>https://github.com/Wheelies/MarkdownLog</projectUrl>
+    <licenseUrl>https://github.com/Wheelies/MarkdownLog/blob/master/LICENSE</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <copyright>Copyright 2014 Stuart Wheelwright</copyright>
+    <tags>markdown</tags>
+  </metadata>
+</package>
