@@ -1,5 +1,9 @@
 version: 0.9.0.{build}
 
+branches:
+  only:
+    - master
+
 assembly_info:
   patch: true
   file: AssemblyInfo.*
