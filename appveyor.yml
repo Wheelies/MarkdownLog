@@ -15,8 +15,8 @@ configuration: Release
 
 build:
   project: MarkdownLog.sln
-  publish_nuget: true
 
 artifacts:
   - path: MarkdownLog\bin\Release\MarkdownLog.dll
     name: MarkdownLog.dll
+  - path: '**\*.nupkg'
