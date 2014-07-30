@@ -66,10 +66,6 @@
     <Compile Include="TestExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FluentTestFramework\FluentTestFramework.csproj">
-      <Project>{851AC7FD-A58A-4484-9024-F3BABFBCF395}</Project>
-      <Name>FluentTestFramework</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MarkdownLog\MarkdownLog.csproj">
       <Project>{58003E79-47E0-47D6-BF62-82051EFC1E8B}</Project>
       <Name>MarkdownLog</Name>
