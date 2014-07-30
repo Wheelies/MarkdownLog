@@ -11,4 +11,7 @@
     <copyright>Copyright 2014 BlackJet Software Ltd</copyright>
     <tags>markdown diagnostics logging pcl</tags>
   </metadata>
+  <files>
+     <file src="..\MarkdownLog\bin\Release\MarkdownLog.dll" target="lib" />
+  </files>
 </package>
