@@ -2,6 +2,7 @@
 <package >
   <metadata>
     <id>MarkdownLog</id>
+	<version>$version$</version>
     <authors>Stuart Wheelwright (@wheelies)</authors>
     <licenseUrl>https://github.com/Wheelies/MarkdownLog/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/Wheelies/MarkdownLog</projectUrl>
