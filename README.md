@@ -9,22 +9,24 @@ Tables
 
 This is how a table is built from a List of objects:
 
-    var data = new[]
-    {
-        new{Year = 1991, Album = "Out of Time", Songs=11, Rating = "* * * *"},
-        new{Year = 1992, Album = "Automatic for the People", Songs=12, Rating = "* * * * *"},
-        new{Year = 1994, Album = "Monster", Songs=12, Rating = "* * *"}
-    };
+```csharp
+var data = new[]
+{
+    new { Year = 1991, Album = "Out of Time", Songs = 11, Rating = "* * * *" },
+    new { Year = 1992, Album = "Automatic for the People", Songs = 12, Rating = "* * * * *" },
+    new { Year = 1994, Album = "Monster", Songs = 12, Rating = "* * *" }
+};
 
-    Console.Write(data.ToMarkdownTable());
-    
-    // Produces:
-    //
-    //     Year | Album                    | Songs | Rating   
-    //     ----:| ------------------------ | -----:| --------- 
-    //     1991 | Out of Time              |    11 | * * * *  
-    //     1992 | Automatic for the People |    12 | * * * * *
-    //     1994 | Monster                  |    12 | * * *    
+Console.Write(data.ToMarkdownTable());
+
+// Produces:
+//
+//     Year | Album                    | Songs | Rating   
+//     ----:| ------------------------ | -----:| --------- 
+//     1991 | Out of Time              |    11 | * * * *  
+//     1992 | Automatic for the People |    12 | * * * * *
+//     1994 | Monster                  |    12 | * * *    
+```
 
 Once passed through a GitHub-flavoured parser, you get a HTML table, complete with headings and alignments:
 
@@ -39,19 +41,21 @@ Lists
 
 A collection can be output as a numbered list:
 
-    var planets = new[] { "Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"};
-    Console.Write(planets.ToMarkdownNumberedList());
-    
-    // Produces:
-    //
-    //    1. Mercury
-    //    2. Venus
-    //    3. Earth
-    //    4. Mars
-    //    5. Jupiter
-    //    6. Saturn
-    //    7. Uranus
-    //    8. Neptune
+```csharp
+var planets = new[] { "Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune" };
+Console.Write(planets.ToMarkdownNumberedList());
+
+// Produces:
+//
+//    1. Mercury
+//    2. Venus
+//    3. Earth
+//    4. Mars
+//    5. Jupiter
+//    6. Saturn
+//    7. Uranus
+//    8. Neptune
+```
 
 When passed through a Markdown parser, this becomes:
 
@@ -66,15 +70,17 @@ When passed through a Markdown parser, this becomes:
 
 Alternatively, the list can have bullets:
 
-    var beatles = new[] { "John", "Paul", "Ringo", "George" };
-    Console.Write(beatles.ToMarkdownBulettedList());
-	
-	//Produces:
-	//
-    //   * John
-    //   * Paul
-    //   * Ringo
-    //   * George
+```csharp
+var beatles = new[] { "John", "Paul", "Ringo", "George" };
+Console.Write(beatles.ToMarkdownBulettedList());
+
+//Produces:
+//
+//   * John
+//   * Paul
+//   * Ringo
+//   * George
+```
 
 This is parsed to:
 
@@ -89,31 +95,33 @@ Bar Chart example
 
 A barchart can be produced from a collection of KeyValue or Tuple objects
 
-    var worldCup = new Dictionary<string, int>
-    {
-        {"Brazil", 5},
-        {"Italy", 4},
-        {"Germany", 4},
-        {"Argentina", 2},
-        {"Uruguay", 2},
-        {"France", 1},
-        {"Spain", 1},
-        {"England", 1}
-    };
+```csharp
+var worldCup = new Dictionary<string, int>
+{
+    { "Brazil", 5 },
+    { "Italy", 4 },
+    { "Germany", 4 },
+    { "Argentina", 2 },
+    { "Uruguay", 2 },
+    { "France", 1 },
+    { "Spain", 1 },
+    { "England", 1 }
+};
 
-    Console.Write(worldCup.ToMarkdownBarChart());
-    
-    // Produces:
-    //
-    //    Brazil    |#####  5
-    //    Italy     |####  4
-    //    Germany   |####  4
-    //    Argentina |##  2
-    //    Uruguay   |##  2
-    //    France    |#  1
-    //    Spain     |#  1
-    //    England   |#  1
-    //              ------
+Console.Write(worldCup.ToMarkdownBarChart());
+
+// Produces:
+//
+//    Brazil    |#####  5
+//    Italy     |####  4
+//    Germany   |####  4
+//    Argentina |##  2
+//    Uruguay   |##  2
+//    France    |#  1
+//    Spain     |#  1
+//    England   |#  1
+//              ------
+```
 
 Bar charts are not supported by standard Markdown. When a barchart is passed through a Markdown parser, it is rendered as a code block that retains its structure:
 
@@ -130,19 +138,21 @@ Bar charts are not supported by standard Markdown. When a barchart is passed thr
 A bar chart can be produced from floating point and negative numbers and scaling can be applied as desired:
 
 
-    const int valueCount = 20;
-    var chart = new BarChart
-    {
-        ScaleAlways = true,
-        MaximumChartWidth = 40,
-        DataPoints = from i in Enumerable.Range(0, valueCount)
-            let rad = (i * 2.0 * Math.PI) / valueCount
-            select new BarChartDataPoint
-            {
-                CategoryName = string.Format("Cos({0:0.0})", rad),
-                Value = Math.Cos(rad)
-            }
-    };
+```csharp
+const int valueCount = 20;
+var chart = new BarChart
+{
+    ScaleAlways = true,
+    MaximumChartWidth = 40,
+    DataPoints = from i in Enumerable.Range(0, valueCount)
+        let rad = (i * 2.0 * Math.PI) / valueCount
+        select new BarChartDataPoint
+        {
+            CategoryName = string.Format("Cos({0:0.0})", rad),
+            Value = Math.Cos(rad)
+        }
+};
+```
 
 This produces:
 
@@ -173,15 +183,17 @@ Paragraphs
 
 Strings can be written as a word-wrapped paragraph:
 
-    var text ="Lolita, light of my life, fire of my loins. My sin, my soul. Lo-lee-ta: the tip of the tongue taking a trip of three steps down the palate to tap, at three, on the teeth. Lo. Lee. Ta.";
-    
-    Console.Write(text.ToMarkdownParagraph());
+```csharp
+var text = "Lolita, light of my life, fire of my loins. My sin, my soul. Lo-lee-ta: the tip of the tongue taking a trip of three steps down the palate to tap, at three, on the teeth. Lo. Lee. Ta.";
 
-    // Produces:
-	//
-	// Lolita, light of my life, fire of my loins. My sin, my soul. Lo-lee-ta: the tip 
-    // of the tongue taking a trip of three steps down the palate to tap, at three, on 
-    // the teeth. Lo. Lee. Ta.
+Console.Write(text.ToMarkdownParagraph());
+
+// Produces:
+//
+// Lolita, light of my life, fire of my loins. My sin, my soul. Lo-lee-ta: the tip 
+// of the tongue taking a trip of three steps down the palate to tap, at three, on 
+// the teeth. Lo. Lee. Ta.
+```
 
 After parsing, this becomes:
 
