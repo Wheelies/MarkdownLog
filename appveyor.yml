@@ -26,11 +26,11 @@ artifacts:
 
 # Temporarily commented out the Nuget package deploy. This should only be done on a separate non-dev branch
 
-deploy:
-  provider: NuGet
-  api_key:
-    secure: n/2gZwCGLcoLBr5nGu5akS0IFQ1YHciI6Wz0NGC+1mLTUtO08Uy+TWn7OtyLG9v3
-  artifact: /.*\.nupkg/
+# deploy:
+#   provider: NuGet
+#   api_key:
+#     secure: n/2gZwCGLcoLBr5nGu5akS0IFQ1YHciI6Wz0NGC+1mLTUtO08Uy+TWn7OtyLG9v3
+#   artifact: /.*\.nupkg/
   
   
   

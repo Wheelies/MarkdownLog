@@ -10,5 +10,3 @@ $content = $content -replace '\$version\$',$versionStr
 $content | Out-File $root\nuget\MarkdownLog.compiled.nuspec
 
 & $root\NuGet\NuGet.exe pack $root\nuget\MarkdownLog.compiled.nuspec
-
-Write-Host "nuget pack returned with $LastExitCode"
