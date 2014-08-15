@@ -13,5 +13,6 @@
   </metadata>
   <files>
      <file src="..\MarkdownLog\bin\Release\MarkdownLog.dll" target="lib\portable-windows8+net45" />
+     <file src="..\MarkdownLog\bin\Release\MarkdownLog.dll" target="lib\portable-net45+win+wpa81" />
   </files>
 </package>
