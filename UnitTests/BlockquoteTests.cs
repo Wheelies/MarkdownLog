@@ -16,7 +16,7 @@ namespace UnitTests.MarkdownLog
                 "> We are what we repeatedly do. Excellence, therefore, is not an act but a habit.\r\n"
                 ,
                 "<blockquote>\n" +
-                "  <p>We are what we repeatedly do. Excellence, therefore, is not an act but a habit.</p>\n" +
+                "<p>We are what we repeatedly do. Excellence, therefore, is not an act but a habit.</p>\n" +
                 "</blockquote>\n");
         }
 

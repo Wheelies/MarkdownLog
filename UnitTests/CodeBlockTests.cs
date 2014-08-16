@@ -43,7 +43,7 @@ let rec qsort(xs : List<int>) =
                 "             /  None              P0                b\n" +
                 "   b        &lt;    0             R, R, P1             b\n" +
                 "             \\   1             R, R, P0             b\n" +
-                "</code></pre>\n");
+                "</code></pre>\n\n");
         }
     }
 }

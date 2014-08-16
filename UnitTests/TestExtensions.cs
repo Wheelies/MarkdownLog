@@ -29,8 +29,9 @@ namespace UnitTests.MarkdownLog
             
             Trace.WriteLine("");
 
-            var markdownSharp = new MarkdownToHtmlConverter();
-            var html = markdownSharp.Transform(markdown);
+            var markdownDeep = new MarkdownDeep.Markdown {ExtraMode = true};
+
+            var html = markdownDeep.Transform(markdown);
 
             html.WriteToTraceWithDelimiter("HTML");
 
@@ -44,7 +45,7 @@ namespace UnitTests.MarkdownLog
             if (expectedHtml != null)
             {
                 if (expectedHtml != html)
-                    Assert.Fail("Unexpected HTML:\r\n\r\n{0}", BuildOutputWithDelimiter(html, "Expected HTML"));
+                    Assert.Fail("Unexpected HTML:\r\n\r\n{0}", BuildOutputWithDelimiter(expectedHtml, "Expected HTML"));
                 else
                     Trace.WriteLine("HTML output meets expectations");
             }

@@ -64,12 +64,36 @@ namespace UnitTests.MarkdownLog
                 "     1992 | Automatic for the People | 12         | * * * * *\r\n" +
                 "     1994 | Monster                  | 12         | * * *    \r\n"
                 ,
-                "<pre><code> Year | Album                    | Song Count | Rating   \n" +
-                " ---- | ------------------------ | ---------- | --------- \n" +
-                " 1991 | Out of Time              | 11         | * * * *  \n" +
-                " 1992 | Automatic for the People | 12         | * * * * *\n" +
-                " 1994 | Monster                  | 12         | * * *    \n" +
-                "</code></pre>\n");
+                "<table>\n" +
+                "<thead>\n" +
+                "<tr>\n" +
+                "	<th>Year</th>\n" +
+                "	<th>Album</th>\n" +
+                "	<th>Song Count</th>\n" +
+                "	<th>Rating</th>\n" +
+                "</tr>\n" +
+                "</thead>\n" +
+                "<tbody>\n" +
+                "<tr>\n" +
+                "	<td>1991</td>\n" +
+                "	<td>Out of Time</td>\n" +
+                "	<td>11</td>\n" +
+                "	<td>* * * *</td>\n" +
+                "</tr>\n" +
+                "<tr>\n" +
+                "	<td>1992</td>\n" +
+                "	<td>Automatic for the People</td>\n" +
+                "	<td>12</td>\n" +
+                "	<td>* * * * *</td>\n" +
+                "</tr>\n" +
+                "<tr>\n" +
+                "	<td>1994</td>\n" +
+                "	<td>Monster</td>\n" +
+                "	<td>12</td>\n" +
+                "	<td>* * *</td>\n" +
+                "</tr>\n" +
+                "</tbody>\n" +
+                "</table>\n");
         }
 
         [TestMethod]

@@ -48,7 +48,7 @@ namespace UnitTests.MarkdownLog
                 "Spain     |#  1\n" +
                 "England   |#  1\n" +
                 "          ------\n" +
-                "</code></pre>\n");
+                "</code></pre>\n\n");
         }
 
         [TestMethod]
@@ -201,7 +201,7 @@ namespace UnitTests.MarkdownLog
                 "                   -----------\r\n",
                 "<pre><code>\\tLine1\\rLine2 |##########  10\n" +
                 "               -----------\n" +
-                "</code></pre>\n");
+                "</code></pre>\n\n");
         }
 
     }
