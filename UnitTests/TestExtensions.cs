@@ -29,9 +29,7 @@ namespace UnitTests.MarkdownLog
             
             Trace.WriteLine("");
 
-            var markdownDeep = new MarkdownDeep.Markdown {ExtraMode = true};
-
-            var html = markdownDeep.Transform(markdown);
+            var html = markdown.MarkdownToHtml();
 
             html.WriteToTraceWithDelimiter("HTML");
 
