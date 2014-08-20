@@ -63,8 +63,8 @@ namespace MarkdownLog
 
             var widestCell = rows.Max();
 
-            var horizontalLine = " " + new String('-', widestCell);
-            var containedHorizontalLine = "|" + new String('-', widestCell) + "|";
+            var horizontalLine = " " + new String('_', widestCell);
+            var containedHorizontalLine = "|" + new String('_', widestCell) + "|";
 
             builder.Append(indent);
             builder.AppendLine(horizontalLine);
@@ -96,7 +96,7 @@ namespace MarkdownLog
             }
 
             builder.Append(indent);
-            builder.AppendLine(horizontalLine);
+            builder.AppendLine(containedHorizontalLine);
 
             return builder.ToString();
         }

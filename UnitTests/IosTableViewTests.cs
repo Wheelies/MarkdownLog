@@ -35,7 +35,36 @@ namespace UnitTests.MarkdownLog
                 }
             };
 
-            tableView.WriteToTrace();
+            tableView.AssertOutputEquals(
+                "     _____________\r\n" +
+                "    |Mammals      |\r\n" +
+                "    |_____________|\r\n" +
+                "    | Elephant  > |\r\n" +
+                "    | Giraffe   > |\r\n" +
+                "    | Monkey    > |\r\n" +
+                "    | Cat       > |\r\n" +
+                "    |_____________|\r\n" +
+                "    |Reptiles     |\r\n" +
+                "    |_____________|\r\n" +
+                "    | Lizard    > |\r\n" +
+                "    | Snake     > |\r\n" +
+                "    | Crocodile > |\r\n" +
+                "    |_____________|\r\n",
+                "<pre><code> _____________\n" +
+                "|Mammals      |\n" +
+                "|_____________|\n" +
+                "| Elephant  &gt; |\n" +
+                "| Giraffe   &gt; |\n" +
+                "| Monkey    &gt; |\n" +
+                "| Cat       &gt; |\n" +
+                "|_____________|\n" +
+                "|Reptiles     |\n" +
+                "|_____________|\n" +
+                "| Lizard    &gt; |\n" +
+                "| Snake     &gt; |\n" +
+                "| Crocodile &gt; |\n" +
+                "|_____________|\n" +
+                "</code></pre>\n\n");
         }
 
         [TestMethod]
