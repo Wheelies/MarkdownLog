@@ -13,7 +13,7 @@
   </metadata>
   <files>
     <file src="..\MarkdownLog\bin\Release\MarkdownLog.dll" target="lib\portable-windows8+net45" />
-    <file src="..\MarkdownLog\bin\Release\MarkdownLog.dll" target="lib\portable-net45+win+wpa81" />
+    <file src="..\MarkdownLog\bin\Release\MarkdownLog.dll" target="lib\portable-net45+win+wp8+wpa81" />
     <file src="..\MarkdownLog\bin\Release\MarkdownLog.dll" target="lib\portable-net45+sl50+MonoAndroid10+MonoTouch10" />
   </files>
 </package>

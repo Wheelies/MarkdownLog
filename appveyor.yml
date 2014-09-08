@@ -1,4 +1,4 @@
-version: 0.9.2.{build}
+version: 0.9.3.{build}
 
 branches:
   only:
@@ -25,11 +25,11 @@ artifacts:
   - path: '**\*.nupkg'
 
 #uncomment to publish to NuGet
-#deploy:
-#  provider: NuGet
-#  api_key:
-#    secure: n/2gZwCGLcoLBr5nGu5akS0IFQ1YHciI6Wz0NGC+1mLTUtO08Uy+TWn7OtyLG9v3
-#  artifact: /.*\.nupkg/
+deploy:
+  provider: NuGet
+  api_key:
+    secure: n/2gZwCGLcoLBr5nGu5akS0IFQ1YHciI6Wz0NGC+1mLTUtO08Uy+TWn7OtyLG9v3
+  artifact: /.*\.nupkg/
   
   
   
