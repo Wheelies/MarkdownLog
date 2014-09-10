@@ -33,6 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="GanttChartActivity.cs" />
+    <Compile Include="GanttChart.cs" />
     <Compile Include="BarChart.cs" />
     <Compile Include="BarChartDataPoint.cs" />
     <Compile Include="BlockQuote.cs" />
