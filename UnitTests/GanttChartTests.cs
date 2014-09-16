@@ -155,5 +155,95 @@ namespace UnitTests.MarkdownLog
                 "</code></pre>\n\n");
         }
 
+        [TestMethod]
+        public void TestCanPlotScaledGanttChart()
+        {
+            var chart = new GanttChart
+            {
+                MaximumChartWidth = 60,
+                Activities = new[]
+                {
+                    new GanttChartActivity {Name = "Site Preparation", StartValue = 1, EndValue = 10},
+                    new GanttChartActivity {Name = "Dig Trenches", StartValue = 12, EndValue = 16},
+                    new GanttChartActivity {Name = "Drains", StartValue = 16, EndValue = 22},
+                    new GanttChartActivity {Name = "Foundations", StartValue = 24, EndValue = 30},
+                    new GanttChartActivity {Name = "Brickwork", StartValue = 30, EndValue = 54},
+                    new GanttChartActivity {Name = "Roof Timber", StartValue = 54, EndValue = 60},
+                    new GanttChartActivity {Name = "Partitions", StartValue = 54, EndValue = 60},
+                    new GanttChartActivity {Name = "Frames", StartValue = 54, EndValue = 64},
+                    new GanttChartActivity {Name = "Roof Tiling", StartValue = 60, EndValue = 72},
+                    new GanttChartActivity {Name = "First Fix", StartValue = 72, EndValue = 82},
+                    new GanttChartActivity {Name = "Glazing", StartValue = 60, EndValue = 66},
+                    new GanttChartActivity {Name = "Plaster", StartValue = 68, EndValue = 80},
+                    new GanttChartActivity {Name = "Second Fix", StartValue = 80, EndValue = 92},
+                    new GanttChartActivity {Name = "Interior Finish", StartValue = 88, EndValue = 100},
+                    new GanttChartActivity {Name = "Cleanup", StartValue = 100, EndValue = 108}
+                }
+            };
+
+            chart.AssertOutputEquals(
+                "    Site Preparation | =====                                                          1 ->  10  (9)\r\n" +
+                "    Dig Trenches     |       ==                                                      12 ->  16  (4)\r\n" +
+                "    Drains           |         ===                                                   16 ->  22  (6)\r\n" +
+                "    Foundations      |             ====                                              24 ->  30  (6)\r\n" +
+                "    Brickwork        |                 =============                                 30 ->  54 (24)\r\n" +
+                "    Roof Timber      |                              ===                              54 ->  60  (6)\r\n" +
+                "    Partitions       |                              ===                              54 ->  60  (6)\r\n" +
+                "    Frames           |                              ======                           54 ->  64 (10)\r\n" +
+                "    Roof Tiling      |                                 =======                       60 ->  72 (12)\r\n" +
+                "    First Fix        |                                        ======                 72 ->  82 (10)\r\n" +
+                "    Glazing          |                                 ====                          60 ->  66  (6)\r\n" +
+                "    Plaster          |                                      ======                   68 ->  80 (12)\r\n" +
+                "    Second Fix       |                                            =======            80 ->  92 (12)\r\n" +
+                "    Interior Finish  |                                                 =======       88 -> 100 (12)\r\n" +
+                "    Cleanup          |                                                        ====  100 -> 108  (8)\r\n" +
+                "                     -------------------------------------------------------------\r\n",
+                "<pre><code>Site Preparation | =====                                                          1 -&gt;  10  (9)\n" +
+                "Dig Trenches     |       ==                                                      12 -&gt;  16  (4)\n" +
+                "Drains           |         ===                                                   16 -&gt;  22  (6)\n" +
+                "Foundations      |             ====                                              24 -&gt;  30  (6)\n" +
+                "Brickwork        |                 =============                                 30 -&gt;  54 (24)\n" +
+                "Roof Timber      |                              ===                              54 -&gt;  60  (6)\n" +
+                "Partitions       |                              ===                              54 -&gt;  60  (6)\n" +
+                "Frames           |                              ======                           54 -&gt;  64 (10)\n" +
+                "Roof Tiling      |                                 =======                       60 -&gt;  72 (12)\n" +
+                "First Fix        |                                        ======                 72 -&gt;  82 (10)\n" +
+                "Glazing          |                                 ====                          60 -&gt;  66  (6)\n" +
+                "Plaster          |                                      ======                   68 -&gt;  80 (12)\n" +
+                "Second Fix       |                                            =======            80 -&gt;  92 (12)\n" +
+                "Interior Finish  |                                                 =======       88 -&gt; 100 (12)\n" +
+                "Cleanup          |                                                        ====  100 -&gt; 108  (8)\n" +
+                "                 -------------------------------------------------------------\n" +
+                "</code></pre>\n\n"
+
+                );
+        }
+
+        [TestMethod]
+        public void TestDecimalValuesAreRounded()
+        {
+            var chart = new GanttChart
+            {
+                MaximumChartWidth = 60,
+                Activities = new[]
+                {
+                    new GanttChartActivity {Name = "Fetch HTML", StartValue = 0, EndValue = 1.2},
+                    new GanttChartActivity {Name = "Fetch Images", StartValue = 0, EndValue = 1.8},
+                    new GanttChartActivity {Name = "Render Page", StartValue = 1.2, EndValue = 3.6},
+                }
+            };
+
+            chart.AssertOutputEquals(
+                "    Fetch HTML   |=      0 -> 1.2 (1.2)\r\n" +
+                "    Fetch Images |==     0 -> 1.8 (1.8)\r\n" +
+                "    Render Page  | ==  1.2 -> 3.6 (2.4)\r\n" +
+                "                 ----\r\n",
+                "<pre><code>Fetch HTML   |=      0 -&gt; 1.2 (1.2)\n" +
+                "Fetch Images |==     0 -&gt; 1.8 (1.8)\n" +
+                "Render Page  | ==  1.2 -&gt; 3.6 (2.4)\n" +
+                "             ----\n" +
+                "</code></pre>\n\n"
+                );
+        }
     }
 }
