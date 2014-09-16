@@ -245,5 +245,45 @@ namespace UnitTests.MarkdownLog
                 "</code></pre>\n\n"
                 );
         }
+
+        [TestMethod]
+        public void TestZeroLengthActivitiesArePlotted()
+        {
+            var chart = new GanttChart
+            {
+                MaximumChartWidth = 60,
+                Activities = new[]
+                {
+                    new GanttChartActivity {Name = "v1.0 Release Date", StartValue = -10, EndValue = -10},
+                    new GanttChartActivity {Name = "Today", StartValue = 0, EndValue = 0},
+                    new GanttChartActivity {Name = "Feasibility Study", StartValue = 0, EndValue = 5},
+                    new GanttChartActivity {Name = "Requirements Gathering", StartValue = 4, EndValue = 10},
+                    new GanttChartActivity {Name = "Development", StartValue = 8, EndValue = 15},
+                    new GanttChartActivity {Name = "Testing", StartValue = 11, EndValue = 18},
+                    new GanttChartActivity {Name = "v2.0 Release Date", StartValue = 20, EndValue = 20},
+                }
+            };
+
+            chart.AssertOutputEquals(
+                "    v1.0 Release Date      +         |                      -10 -> -10 (0)\r\n" +
+                "    Today                            +                        0 ->   0 (0)\r\n" +
+                "    Feasibility Study                |=====                   0 ->   5 (5)\r\n" +
+                "    Requirements Gathering           |    ======              4 ->  10 (6)\r\n" +
+                "    Development                      |        =======         8 ->  15 (7)\r\n" +
+                "    Testing                          |           =======     11 ->  18 (7)\r\n" +
+                "    v2.0 Release Date                |                   +   20 ->  20 (0)\r\n" +
+                "                           -------------------------------\r\n",
+                "<pre><code>v1.0 Release Date      +         |                      -10 -&gt; -10 (0)\n" +
+                "Today                            +                        0 -&gt;   0 (0)\n" +
+                "Feasibility Study                |=====                   0 -&gt;   5 (5)\n" +
+                "Requirements Gathering           |    ======              4 -&gt;  10 (6)\n" +
+                "Development                      |        =======         8 -&gt;  15 (7)\n" +
+                "Testing                          |           =======     11 -&gt;  18 (7)\n" +
+                "v2.0 Release Date                |                   +   20 -&gt;  20 (0)\n" +
+                "                       -------------------------------\n" +
+                "</code></pre>\n\n"
+                );
+        }
+
     }
 }

@@ -32,6 +32,7 @@ namespace MarkdownLog
 {
     public class GanttChart : MarkdownElement
     {
+        private const string ZeroLengthActivityIndicator = "+";
         private IEnumerable<GanttChartActivity> _activities = new List<GanttChartActivity>();
         private int _maximumChartWidth = 80;
         private int _maximumDecimalPlaces = 2;
@@ -181,13 +182,26 @@ namespace MarkdownLog
                 builder.Append(" ");
 
                 var scaledRange = activity.Range.Scale(unitLength);
+                bool isZeroLengthActivity = scaledRange.Length < unitLength;
+                bool isZeroLengthNegative = isZeroLengthActivity && scaledRange.Start < 0;
+                
 
                 builder.Append(Spaces(scaledNegativeRange.GetStartOffset(scaledRange)));
-                builder.Append(Bar(scaledNegativeRange.GetOverlap(scaledRange)));
-                builder.Append(Spaces(scaledNegativeRange.GetEndOffset(scaledRange)));
-                builder.Append("|");
-                builder.Append(Spaces(scaledPositiveRange.GetStartOffset(scaledRange)));
-                builder.Append(Bar(scaledPositiveRange.GetOverlap(scaledRange)));
+                builder.Append(isZeroLengthNegative ? ZeroLengthActivityIndicator : Bar(scaledNegativeRange.GetOverlap(scaledRange)));
+                
+                double spacesAfterNegative = scaledNegativeRange.GetEndOffset(scaledRange);
+                if (isZeroLengthNegative) spacesAfterNegative--;
+
+                builder.Append(Spaces(spacesAfterNegative));
+                builder.Append(isZeroLengthActivity && Math.Abs(scaledRange.Start) < unitLength ? ZeroLengthActivityIndicator : "|");
+
+                bool isZeroLengthPositive = isZeroLengthActivity && scaledRange.Start > 0;
+                double spacesBeforePositive = scaledPositiveRange.GetStartOffset(scaledRange);
+                if (isZeroLengthPositive) spacesBeforePositive--;
+
+                builder.Append(Spaces(spacesBeforePositive));
+
+                builder.Append(isZeroLengthPositive ? ZeroLengthActivityIndicator : Bar(scaledPositiveRange.GetOverlap(scaledRange)));
                 builder.Append(Spaces(scaledPositiveRange.GetEndOffset(scaledRange)));
                 builder.Append(Spaces(2));
 
