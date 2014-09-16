@@ -56,82 +56,175 @@ namespace MarkdownLog
             set { _activities = value ?? Enumerable.Empty<GanttChartActivity>(); }
         }
 
+        internal class Range
+        {
+            private static readonly Range NullRange = new Range(Double.NaN, Double.NaN);
+
+            private readonly double _start;
+            private readonly double _end;
+
+            internal Range(double start, double end)
+            {
+                _start = Math.Min(start, end);
+                _end = Math.Max(start, end);
+            }
+
+            public double Start
+            {
+                get { return _start; }
+            }
+
+            public double End
+            {
+                get { return _end; }
+            }
+
+            public double Length
+            {
+                get { return _end - _start; }
+            }
+
+            public Range Scale(double unitLength)
+            {
+                return new Range(Scale(_start, unitLength), Scale(_end, unitLength));
+            }
+
+            private static int Scale(double value, double unitLength)
+            {
+                return (int)Math.Round(unitLength * value);
+            }
+
+            private Range GetIntersect(Range range)
+            {
+                if (End < range.Start || range.End < Start)
+                    return NullRange;
+
+                var max = Math.Min(End, range.End);
+                var min = Math.Max(Start, range.Start);
+
+                return new Range(min, max);
+            }
+
+            public double GetOverlap(Range range)
+            {
+                var intersect = GetIntersect(range);
+
+                return (intersect == NullRange) ? 0 : intersect.Length;
+            }
+
+            public double GetStartOffset(Range range)
+            {
+                var intersect = GetIntersect(range);
+                return intersect == NullRange ? 0 : intersect.Start - Start;
+            }
+
+            public double GetEndOffset(Range range)
+            {
+                var intersect = GetIntersect(range);
+                return intersect == NullRange ? Length : End - intersect.End;
+            }
+
+            public override string ToString()
+            {
+                return string.Format("{0} -> {1}", _start, _end);
+            }
+        }
+
+        private class PreparedActivity
+        {
+            public string Name { get; set; }
+            public string StartText { get; set; }
+            public string EndText { get; set; }
+            public string LengthText { get; set; }
+            public Range Range { get; set; }
+        }
+
         public override string ToMarkdown()
         {
             if (!_activities.Any()) return "";
 
+            var activities = (from i in _activities
+                let range = new Range(i.StartValue, i.EndValue)
+                select new PreparedActivity
+                {
+                    Name = i.Name.EscapeCSharpString(),
+                    StartText = FormatValue(i.StartValue),
+                    EndText = FormatValue(i.EndValue),
+                    LengthText = string.Format("({0})", FormatValue(range.End - range.Start)),
+                    Range = range,
+                }).ToList();
+
             var builder = new StringBuilder();
             var indent = new string(' ', 4);
 
-            const double overallMinValue = 0f;
-            double overallMaxValue = Math.Max(_activities.Max(i => i.StartValue), _activities.Max(i => i.EndValue));
+            var maxEnd = activities.Max(i => i.Range.End);
+            var minStart = activities.Min(i => i.Range.Start);
+            var maxActivityRangeWidth = ( maxEnd - minStart ) + "|".Length;
 
-            var width = Math.Max(Math.Min(overallMaxValue - overallMinValue, _maximumChartWidth), ScaleAlways || overallMaxValue < 1 ? _maximumChartWidth : 0);
-            var unitLength = width / (overallMaxValue - overallMinValue);
+            var minimumChartWidth = ScaleAlways || maxActivityRangeWidth < 1 ? _maximumChartWidth : 0;
+            var chartWidth = (int)Math.Max(Math.Min(maxActivityRangeWidth, _maximumChartWidth), minimumChartWidth);
+            var unitLength = chartWidth / maxActivityRangeWidth;
 
-            var longestActivityName = _activities.Max(i => i.Name.EscapeCSharpString().Length);
-            var longestFormattedStartValue = _activities.Max(i => FormatValue(GetMinValue(i)).Length);
-            var longestFormattedEndValue = _activities.Max(i => FormatValue(GetMaxValue(i)).Length);
-            var longestFormattedLengthValue = _activities.Max(i => string.Format("({0})", FormatValue(GetMaxValue(i) - GetMinValue(i))).Length);
+            var longestName = activities.Max(i => i.Name.Length);
+            var longestStartText = activities.Max(i => i.StartText.Length);
+            var longestEndText = activities.Max(i => i.EndText.Length);
+            var longestLengthText = activities.Max(i => i.LengthText.Length);
 
-            var maxEndColumn = (int) (overallMaxValue*unitLength);
+            var scaledNegativeRange = new Range(Math.Min(0, minStart), 0).Scale(unitLength);
+            var scaledPositiveRange = new Range(0, Math.Max(0, maxEnd)).Scale(unitLength);
 
-            foreach (var dataPoint in _activities)
+            foreach (var activity in activities)
             {
-                var minValue = GetMinValue(dataPoint);
-                var maxValue = GetMaxValue(dataPoint);
-
-                var startColumn = GetColumnNumber(minValue, unitLength);
-                var endColumn = GetColumnNumber(maxValue, unitLength);
-
-                var barLength = endColumn - startColumn;
-
                 builder.Append(indent);
-                builder.Append(dataPoint.Name.EscapeCSharpString().PadRight(longestActivityName));
+                builder.Append(activity.Name.PadRight(longestName));
 
                 builder.Append(" ");
 
+                var scaledRange = activity.Range.Scale(unitLength);
+
+                builder.Append(Spaces(scaledNegativeRange.GetStartOffset(scaledRange)));
+                builder.Append(Bar(scaledNegativeRange.GetOverlap(scaledRange)));
+                builder.Append(Spaces(scaledNegativeRange.GetEndOffset(scaledRange)));
                 builder.Append("|");
-                builder.Append(new string(' ', startColumn));
-                builder.Append(new string('=', barLength));
-                builder.Append("  ");
-                builder.Append(new string(' ', maxEndColumn - endColumn));
-                builder.Append(FormatValue(minValue).PadLeft(longestFormattedStartValue));
+                builder.Append(Spaces(scaledPositiveRange.GetStartOffset(scaledRange)));
+                builder.Append(Bar(scaledPositiveRange.GetOverlap(scaledRange)));
+                builder.Append(Spaces(scaledPositiveRange.GetEndOffset(scaledRange)));
+                builder.Append(Spaces(2));
+
+                builder.Append(activity.StartText.PadLeft(longestStartText));
                 builder.Append(" -> ");
-                builder.Append(FormatValue(maxValue).PadLeft(longestFormattedEndValue));
+                builder.Append(activity.EndText.PadLeft(longestEndText));
                 builder.Append(" ");
-                builder.Append(string.Format("({0})", FormatValue(maxValue - minValue)).PadLeft(longestFormattedLengthValue));
+                builder.Append(activity.LengthText.PadLeft(longestLengthText));
                 builder.AppendLine();
             }
 
             builder.Append(indent);
-            builder.Append(new string(' ', longestActivityName + 1));
-            
-            builder.Append(new string('-', 1 + maxEndColumn));
+            builder.Append(new string(' ', longestName + 1));
+
+            builder.Append(new string('-', (int) Math.Round(scaledNegativeRange.Length + 1 + scaledPositiveRange.Length)));
             builder.AppendLine();
             
             return builder.ToString();
         }
 
-        private static double GetMinValue(GanttChartActivity activity)
+        private string Spaces(double count)
         {
-            return Math.Min(activity.StartValue, activity.EndValue);
+            if (count < 0)
+                throw new ArgumentOutOfRangeException("count", string.Format("Cannot be negative (value was {0})", count));
+
+            return new string(' ', (int) Math.Round(count));
         }
 
-        private static double GetMaxValue(GanttChartActivity activity)
+        private string Bar(double length)
         {
-            return Math.Max(activity.StartValue, activity.EndValue);
+            return new string('=', (int)Math.Round(length));
         }
 
         private string FormatValue(double value)
         {
             var format = "{0:0." + new string('#', _maximumDecimalPlaces) + "}";
             return string.Format(format, value);
-        }
-
-        private static int GetColumnNumber(double value, double unitLength)
-        {
-            return (int) Math.Max(0, Math.Round(unitLength*value));
         }
     }
 }
