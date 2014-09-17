@@ -127,11 +127,11 @@ namespace UnitTests.MarkdownLog
 
             chart.AssertOutputEquals(
                 "    Both Negative            ==== |     -5 -> -1 (4)\r\n" +
-                "    Negative (zero length)        |     -4 -> -4 (0)\r\n" +
+                "    Negative (zero length)    +   |     -4 -> -4 (0)\r\n" +
                 "    Negative to Zero          ====|     -4 ->  0 (4)\r\n" +
                 "    Negative to Positive       ===|==   -3 ->  2 (5)\r\n" +
                 "    Zero to Positive              |===   0 ->  3 (3)\r\n" +
-                "    Zero to Zero                  |      0 ->  0 (0)\r\n" +
+                "    Zero to Zero                  +      0 ->  0 (0)\r\n" +
                 "    Both Positive                 | ==   1 ->  3 (2)\r\n" +
                 "    Both Negative (inverted) ==== |     -1 -> -5 (4)\r\n" +
                 "    Zero to Negative          ====|      0 -> -4 (4)\r\n" +
@@ -140,11 +140,11 @@ namespace UnitTests.MarkdownLog
                 "    Both Positive (inverted)      | ==   3 ->  1 (2)\r\n" +
                 "                             ---------\r\n",
                 "<pre><code>Both Negative            ==== |     -5 -&gt; -1 (4)\n" +
-                "Negative (zero length)        |     -4 -&gt; -4 (0)\n" +
+                "Negative (zero length)    +   |     -4 -&gt; -4 (0)\n" +
                 "Negative to Zero          ====|     -4 -&gt;  0 (4)\n" +
                 "Negative to Positive       ===|==   -3 -&gt;  2 (5)\n" +
                 "Zero to Positive              |===   0 -&gt;  3 (3)\n" +
-                "Zero to Zero                  |      0 -&gt;  0 (0)\n" +
+                "Zero to Zero                  +      0 -&gt;  0 (0)\n" +
                 "Both Positive                 | ==   1 -&gt;  3 (2)\n" +
                 "Both Negative (inverted) ==== |     -1 -&gt; -5 (4)\n" +
                 "Zero to Negative          ====|      0 -&gt; -4 (4)\n" +
