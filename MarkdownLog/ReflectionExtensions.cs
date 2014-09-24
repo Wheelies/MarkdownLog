@@ -24,6 +24,9 @@
 // */
 #endregion
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace MarkdownLog
 {
@@ -85,5 +88,13 @@ namespace MarkdownLog
             return false;
         }
 
+        public static bool IsEnumerable(this Type type)
+        {
+            var isGenericEnumerable = typeof(IEnumerable<>).IsAssignableFrom(type);
+            var legacyEnumerable = typeof(IEnumerable).IsAssignableFrom(type);
+
+            return isGenericEnumerable ||
+                   legacyEnumerable;
+        }
     }
 }

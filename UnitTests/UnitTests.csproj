@@ -65,6 +65,7 @@
     <Compile Include="IosTableViewTests.cs" />
     <Compile Include="StringExtensionsTests.cs" />
     <Compile Include="TestExtensions.cs" />
+    <Compile Include="ReflectionExtensionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MarkdownLog\MarkdownLog.csproj">

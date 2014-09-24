@@ -63,6 +63,7 @@
     <Compile Include="TableColumnAlignment.cs" />
     <Compile Include="TableCell.cs" />
     <Compile Include="TableCellRenderSpecification.cs" />
+    <Compile Include="TableOptions.cs" />
     <Compile Include="TableRow.cs" />
     <Compile Include="Header.cs" />
     <Compile Include="HeaderBase.cs" />

@@ -130,10 +130,19 @@ namespace MarkdownLog
 
         public static Table ToMarkdownTable<T>(this IEnumerable<T> rows)
         {
-            var properties = typeof (T).GetProperties().ToList();
+            return ToMarkdownTable(rows, TableOptions.Default);
+        }
 
+        public static Table ToMarkdownTable<T>(this IEnumerable<T> rows, TableOptions options)
+        {
+            var allProperties = typeof (T).GetProperties();
+
+            var properties = options == TableOptions.ExcludeCollectionProperties
+                ? allProperties.Where(p => !p.PropertyType.IsEnumerable() || (p.PropertyType == typeof (string))).ToList()
+                : allProperties.ToList();
+            
             return ToMarkdownTable(rows, properties.Select(property => (Func<T, object>) (r => r.GetFormattedValue(property))).ToArray())
-                .WithHeaders(properties.Select(i=>i.Name).ToArray());
+                    .WithHeaders(properties.Select(i => i.Name).ToArray());
         }
 
         private static string GetFormattedValue<T>(this T obj, PropertyInfo property)

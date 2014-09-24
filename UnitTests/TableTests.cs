@@ -311,5 +311,44 @@ namespace UnitTests.MarkdownLog
 
             books.ToMarkdownTable().WriteToTrace();
         }
+
+        private class Person
+        {
+            public string Name { get; set; }
+            public int Age { get; set; }
+            public IList<Person> Children { get; set; }
+
+            public Person()
+            {
+                Children = new Person[0];
+            }
+        }
+
+        [TestMethod]
+        public void TestCanConfigureOutputOfCollectionsUsingExtensionMethod()
+        {
+            var bart = new Person { Name = "Bart Simpson", Age = 10 };
+            var lisa = new Person { Name = "Lisa Simpson", Age = 8 };
+            var maggie = new Person { Name = "Maggie Simpson", Age = 1 };
+            var homer = new Person { Name = "Homer Simpson", Age = 36, Children = new[] { bart, lisa, maggie } };
+            var marge = new Person { Name = "Marge Simpson", Age = 35, Children = new[] { bart, lisa, maggie } };
+            var milhouse = new Person { Name = "Milhouse Van Houten ", Age = 10 };
+
+            var simpsons = new[] { homer, marge, bart, lisa, maggie, milhouse };
+
+            var md = new MarkdownContainer();
+            md.Append("Table built with no options".ToMarkdownHeader());
+            md.Append(simpsons.ToMarkdownTable());
+
+            md.Append("Table built with Default options".ToMarkdownHeader());
+            md.Append(simpsons.ToMarkdownTable(TableOptions.Default));
+
+            md.Append("Table built with ExcludeCollectionProperties options".ToMarkdownHeader());
+            md.Append(simpsons.ToMarkdownTable(TableOptions.ExcludeCollectionProperties));
+
+            Console.WriteLine(md);
+            
+        }
+
     }
 }
