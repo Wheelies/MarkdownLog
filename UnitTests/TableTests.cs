@@ -230,12 +230,13 @@ namespace UnitTests.MarkdownLog
         }
 
         [TestMethod]
-        public void TestColumnsContainingOnlyNumbersOrBlanksIsAutomaticallyAlignedRight()
+        public void TestColumnsContainingOnlyNumbersOrBlanksOrNullsIsAutomaticallyAlignedRight()
         {
             var data = new Dictionary<string, object>
             {
                 {"Pi", "3.14"},
                 {"Blank", ""},
+                {"Null", null},
                 {"e", 2.718m},
                 {"sqrt(2)", 1.414f},
                 {"Gelford's constant", 23.141},
@@ -246,6 +247,7 @@ namespace UnitTests.MarkdownLog
                 "     ------------------ | -----:\r\n" +
                 "     Pi                 |  3.14\r\n" +
                 "     Blank              |      \r\n" +
+                "     Null               |      \r\n" +
                 "     e                  |  2.72\r\n" +
                 "     sqrt(2)            |  1.41\r\n" +
                 "     Gelford's constant | 23.14\r\n");

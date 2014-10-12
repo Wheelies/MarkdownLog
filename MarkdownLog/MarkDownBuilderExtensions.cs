@@ -196,7 +196,7 @@ namespace MarkdownLog
         public static Table ToMarkdownTable<T>(this IEnumerable<T> rows, params Func<T, object>[] getCellValueFuncs)
         {
             var columnCount = getCellValueFuncs.Count();
-            List<List<object>> rowValues = rows.Select(r => getCellValueFuncs.Select(i => i(r)).ToList()).ToList();
+            List<List<object>> rowValues = rows.Select(r => getCellValueFuncs.Select(i => i(r) ?? "").ToList()).ToList();
 
             return new Table
             {
@@ -207,20 +207,22 @@ namespace MarkdownLog
 
         private static TableColumnAlignment Alignment(IEnumerable<List<object>> rowValues, int columnIndex)
         {
-            return EntireColumnIsNumeric(rowValues, columnIndex) ? TableColumnAlignment.Right : TableColumnAlignment.Unspecified;
+            return EntireColumnIsNumericOrNull(rowValues, columnIndex) ? TableColumnAlignment.Right : TableColumnAlignment.Unspecified;
         }
 
-        private static bool EntireColumnIsNumeric(IEnumerable<List<object>> rowValues, int column)
+        private static bool EntireColumnIsNumericOrNull(IEnumerable<List<object>> rowValues, int column)
         {
-            return rowValues.All(r => IsNumeric(r[column]));
+            return rowValues.All(r => IsNumericOrNull(r[column]));
         }
 
-        private static bool IsNumeric(object obj)
+        private static bool IsNumericOrNull(object obj)
         {
-            decimal decimalValue;
+            if (obj == null) return true;
 
             var isNumeric = obj.GetType().IsNumeric();
             var isBlank = obj.ToString().Trim() == "";
+            
+            decimal decimalValue;
             var isDecimal = decimal.TryParse(obj.ToString(), out decimalValue);
             
             return isNumeric || isBlank || isDecimal;
