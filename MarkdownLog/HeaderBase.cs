@@ -31,6 +31,7 @@ namespace MarkdownLog
     {
         private readonly char _underlineChar;
         private readonly string _text = "";
+		private int _headerLevel = 0;
 
         protected HeaderBase(string text, char underlineChar)
         {
@@ -38,25 +39,58 @@ namespace MarkdownLog
             _underlineChar = underlineChar;
         }
 
+		protected HeaderBase(string text, int headerLevel)
+		{
+			_text = text ?? "";
+			_headerLevel = headerLevel;
+		}
+
+
+
         public override string ToMarkdown()
         {
-            var builder = new StringBuilder();
-
-            var textLines = _text.SplitByLine();
-
-            foreach(var textLine in textLines)
-            {
-                if (builder.Length > 0)
-                    builder.AppendLine();
-
-                var markdown = textLine.EscapeMarkdownCharacters();
-                builder.Append(markdown);
-                builder.AppendLine();
-                builder.Append(new string(_underlineChar, markdown.Length));
-                builder.AppendLine();
-            }
-
-            return builder.ToString();
+			return (0 == _headerLevel) ? ToUnderlinedMarkdown() : ToNumericMarkdown();
         }
+
+
+
+		private string ToNumericMarkdown()
+		{
+			var builder = new StringBuilder();
+			var textLines = _text.SplitByLine();
+			var linePrefix = new string('#', _headerLevel);
+
+			foreach (var textLine in textLines)
+			{
+				builder.Append(linePrefix);
+				builder.Append(textLine);
+				builder.AppendLine();
+			}
+
+			return builder.ToString();
+		}
+
+
+
+		private string ToUnderlinedMarkdown()
+		{
+			var builder = new StringBuilder();
+
+			var textLines = _text.SplitByLine();
+
+			foreach (var textLine in textLines)
+			{
+				if (builder.Length > 0)
+					builder.AppendLine();
+
+				var markdown = textLine.EscapeMarkdownCharacters();
+				builder.Append(markdown);
+				builder.AppendLine();
+				builder.Append(new string(_underlineChar, markdown.Length));
+				builder.AppendLine();
+			}
+
+			return builder.ToString();
+		}
     }
 }

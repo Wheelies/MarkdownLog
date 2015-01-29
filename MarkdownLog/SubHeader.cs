@@ -29,8 +29,8 @@ namespace MarkdownLog
     {
         public SubHeader(string format, params object[] args) : this(string.Format(format, args)) { }
 
-        public SubHeader(string text) : base(text, '-')
-        {
-        }
+        public SubHeader(string text) : base(text, '-') { }
+
+		public SubHeader(string text, int headerLevel) : base(text, headerLevel) { }
     }
 }

@@ -37,6 +37,18 @@ namespace MarkdownLog
             return new Header(text);
         }
 
+
+		/// <summary>
+		/// Returns a markdown string that will translate to <![CDATA[<h1> to <h6>]]>
+		/// </summary>
+		/// <param name="text"></param>
+		/// <param name="headerLevel">Should be between 1 and 6 to product a <![CDATA[<h1> ... <h6>]]></param>
+		/// <returns></returns>
+		public static Header ToMarkdownHeader(this string text, int headerLevel)
+		{
+			return new Header(text, headerLevel);
+		}
+
         public static SubHeader ToMarkdownSubHeader(this string text)
         {
             return new SubHeader(text);
