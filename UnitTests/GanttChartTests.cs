@@ -3,11 +3,20 @@ using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestMethod = NUnit.Framework.TestAttribute;
 using NUnit.Framework;
 using System;
+using System.Threading;
+using System.Globalization;
+
 namespace UnitTests.MarkdownLog
 {
     [TestClass]
     public class GanttChartTests
     {
+        [TestFixtureSetUp]
+        public void TestFixtureSetUp()
+        {
+           Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
+        }
+
         [TestMethod]
         public void TestCanPlotGanttChart()
         {
@@ -36,15 +45,15 @@ namespace UnitTests.MarkdownLog
                 "    Drink Tea         |               ==========  15 -> 25 (10)" +Environment.NewLine+
                 "                      --------------------------"+Environment.NewLine
                 ,
-                "<pre><code>Boil Kettle       |=====                       0 -&gt;  5  (5)"+Environment.NewLine +
-                "Find Mugs         | ==                         1 -&gt;  3  (2)"+Environment.NewLine +
-                "Add Tea Bag       |   =                        3 -&gt;  4  (1)"+Environment.NewLine +
-                "Pour Water in Mug |     =                      5 -&gt;  6  (1)"+Environment.NewLine +
-                "Add Milk          |        =                   8 -&gt;  9  (1)"+Environment.NewLine +
-                "Remove Tea Bag    |         =                  9 -&gt; 10  (1)"+Environment.NewLine +
-                "Drink Tea         |               ==========  15 -&gt; 25 (10)"+Environment.NewLine +
-                "                  --------------------------"+Environment.NewLine +
-                "</code></pre>"+Environment.NewLine+Environment.NewLine);
+                "<pre><code>Boil Kettle       |=====                       0 -&gt;  5  (5)\n"+
+                "Find Mugs         | ==                         1 -&gt;  3  (2)\n"+
+                "Add Tea Bag       |   =                        3 -&gt;  4  (1)\n"+
+                "Pour Water in Mug |     =                      5 -&gt;  6  (1)\n"+
+                "Add Milk          |        =                   8 -&gt;  9  (1)\n"+
+                "Remove Tea Bag    |         =                  9 -&gt; 10  (1)\n"+
+                "Drink Tea         |               ==========  15 -&gt; 25 (10)\n"+
+                "                  --------------------------\n"+
+                "</code></pre>\n\n");
         }
 
         [TestMethod]

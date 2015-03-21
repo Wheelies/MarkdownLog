@@ -35,15 +35,14 @@ namespace UnitTests.MarkdownLog
             html.WriteToTraceWithDelimiter("HTML");
 
             Trace.WriteLine("");
+            Assert.AreEqual(expectedMarkdown, markdown,
+                    string.Format("Unexpected Markdown:{0}{0}{1}", Environment.NewLine, BuildOutputWithDelimiter(expectedHtml, "Expected Markdown")));
 
-            if (expectedMarkdown != markdown)
-                Assert.Fail("Unexpected Markdown:{0}{0}{1}", Environment.NewLine, BuildOutputWithDelimiter(expectedMarkdown, "Expected Markdown"));
-            else
-                Trace.WriteLine("Markdown output meets expectations");
+            Trace.WriteLine("Markdown output meets expectations");
 
             if (expectedHtml != null)
             {
-                Assert.AreEqual(expectedHtml, html,
+                Assert.AreEqual(string.Join(Environment.NewLine,expectedHtml.SplitByLine()), string.Join(Environment.NewLine, html.SplitByLine()),
                     string.Format("Unexpected HTML:{0}{0}{1}", Environment.NewLine, BuildOutputWithDelimiter(expectedHtml, "Expected HTML")));
                 Trace.WriteLine("HTML output meets expectations");
             }
