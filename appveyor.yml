@@ -1,4 +1,4 @@
-version: 0.9.3.{build}
+version: 0.9.4.{build}
 
 branches:
   only:
@@ -12,6 +12,9 @@ assembly_info:
   assembly_informational_version: "{version}"
 
 configuration: Release
+
+before_build:
+  - nuget restore MarkdownLog.sln
 
 build:
   project: MarkdownLog.sln

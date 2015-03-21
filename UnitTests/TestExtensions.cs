@@ -1,7 +1,8 @@
 ﻿using System.Diagnostics;
 using System.Text;
 using MarkdownLog;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
+using System;
 
 namespace UnitTests.MarkdownLog
 {
@@ -34,18 +35,16 @@ namespace UnitTests.MarkdownLog
             html.WriteToTraceWithDelimiter("HTML");
 
             Trace.WriteLine("");
+            Assert.AreEqual(expectedMarkdown, markdown,
+                    string.Format("Unexpected Markdown:{0}{0}{1}", Environment.NewLine, BuildOutputWithDelimiter(expectedHtml, "Expected Markdown")));
 
-            if (expectedMarkdown != markdown)
-                Assert.Fail("Unexpected Markdown:\r\n\r\n{0}", BuildOutputWithDelimiter(expectedMarkdown, "Expected Markdown"));
-            else
-                Trace.WriteLine("Markdown output meets expectations");
+            Trace.WriteLine("Markdown output meets expectations");
 
             if (expectedHtml != null)
             {
-                if (expectedHtml != html)
-                    Assert.Fail("Unexpected HTML:\r\n\r\n{0}", BuildOutputWithDelimiter(expectedHtml, "Expected HTML"));
-                else
-                    Trace.WriteLine("HTML output meets expectations");
+                Assert.AreEqual(string.Join(Environment.NewLine,expectedHtml.SplitByLine()), string.Join(Environment.NewLine, html.SplitByLine()),
+                    string.Format("Unexpected HTML:{0}{0}{1}", Environment.NewLine, BuildOutputWithDelimiter(expectedHtml, "Expected HTML")));
+                Trace.WriteLine("HTML output meets expectations");
             }
         }
 
@@ -58,9 +57,9 @@ namespace UnitTests.MarkdownLog
         private static StringBuilder BuildOutputWithDelimiter(string output, string type)
         {
             var builder = new StringBuilder();
-            builder.AppendFormat("---BEGIN {0}---\r\n", type);
+            builder.AppendFormat("---BEGIN {0}---"+Environment.NewLine, type);
             builder.Append(output);
-            builder.AppendFormat("---END {0}---\r\n", type);
+            builder.AppendFormat("---END {0}---"+Environment.NewLine, type);
             return builder;
         }
     }

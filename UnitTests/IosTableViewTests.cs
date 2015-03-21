@@ -1,5 +1,7 @@
 using MarkdownLog;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TestClass = NUnit.Framework.TestFixtureAttribute;
+using TestMethod = NUnit.Framework.TestAttribute;
+using System;
 
 namespace UnitTests.MarkdownLog
 {
@@ -36,20 +38,20 @@ namespace UnitTests.MarkdownLog
             };
 
             tableView.AssertOutputEquals(
-                "     _____________\r\n" +
-                "    |Mammals      |\r\n" +
-                "    |_____________|\r\n" +
-                "    | Elephant  > |\r\n" +
-                "    | Giraffe   > |\r\n" +
-                "    | Monkey    > |\r\n" +
-                "    | Cat       > |\r\n" +
-                "    |_____________|\r\n" +
-                "    |Reptiles     |\r\n" +
-                "    |_____________|\r\n" +
-                "    | Lizard    > |\r\n" +
-                "    | Snake     > |\r\n" +
-                "    | Crocodile > |\r\n" +
-                "    |_____________|\r\n",
+                "     _____________"+Environment.NewLine +
+                "    |Mammals      |"+Environment.NewLine +
+                "    |_____________|"+Environment.NewLine +
+                "    | Elephant  > |"+Environment.NewLine +
+                "    | Giraffe   > |"+Environment.NewLine +
+                "    | Monkey    > |"+Environment.NewLine +
+                "    | Cat       > |"+Environment.NewLine +
+                "    |_____________|"+Environment.NewLine +
+                "    |Reptiles     |"+Environment.NewLine +
+                "    |_____________|"+Environment.NewLine +
+                "    | Lizard    > |"+Environment.NewLine +
+                "    | Snake     > |"+Environment.NewLine +
+                "    | Crocodile > |"+Environment.NewLine +
+                "    |_____________|"+Environment.NewLine,
                 "<pre><code> _____________\n" +
                 "|Mammals      |\n" +
                 "|_____________|\n" +

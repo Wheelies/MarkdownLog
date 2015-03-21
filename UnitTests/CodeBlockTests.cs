@@ -1,5 +1,7 @@
 ﻿using MarkdownLog;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TestClass = NUnit.Framework.TestFixtureAttribute;
+using TestMethod = NUnit.Framework.TestAttribute;
+using System;
 
 namespace UnitTests.MarkdownLog
 {
@@ -32,11 +34,11 @@ let rec qsort(xs : List<int>) =
             code.AppendLine(@"             \   1             R, R, P0             b");
 
             code.AssertOutputEquals(
-                "    m-config.      symbol         operations     final m-config.\r\n" +
-                "    \r\n" +
-                "                 /  None              P0                b\r\n" +
-                "       b        <    0             R, R, P1             b\r\n" +
-                "                 \\   1             R, R, P0             b\r\n"
+                "    m-config.      symbol         operations     final m-config."+Environment.NewLine +
+                "    "+Environment.NewLine +
+                "                 /  None              P0                b"+Environment.NewLine +
+                "       b        <    0             R, R, P1             b"+Environment.NewLine +
+                "                 \\   1             R, R, P0             b"+Environment.NewLine
                 ,
                 "<pre><code>m-config.      symbol         operations     final m-config.\n" +
                 "\n" +

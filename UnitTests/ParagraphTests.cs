@@ -1,5 +1,7 @@
 ﻿using MarkdownLog;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TestClass = NUnit.Framework.TestFixtureAttribute;
+using TestMethod = NUnit.Framework.TestAttribute;
+using System;
 
 namespace UnitTests.MarkdownLog
 {
@@ -47,21 +49,21 @@ namespace UnitTests.MarkdownLog
         [TestMethod]
         public void TestLineBreaksAreHandled()
         {
-            var paragraph = new Paragraph("I wandered lonely as a cloud\r\n" +
-                                          "That floats on high o'er vales and hills,\r\n" +
-                                          "When all at once I saw a crowd,\r\n" +
-                                          "A host, of golden daffodils;\r\n" +
-                                          "Beside the lake, beneath the trees,\r\n" +
+            var paragraph = new Paragraph("I wandered lonely as a cloud"+Environment.NewLine +
+                                          "That floats on high o'er vales and hills,"+Environment.NewLine +
+                                          "When all at once I saw a crowd,"+Environment.NewLine +
+                                          "A host, of golden daffodils;"+Environment.NewLine +
+                                          "Beside the lake, beneath the trees,"+Environment.NewLine +
                                           "Fluttering and dancing in the breeze.");
 
 
             paragraph.AssertOutputEquals(
-                "I wandered lonely as a cloud  \r\n" +
-                "That floats on high o'er vales and hills,  \r\n" +
-                "When all at once I saw a crowd,  \r\n" +
-                "A host, of golden daffodils;  \r\n" +
-                "Beside the lake, beneath the trees,  \r\n" +
-                "Fluttering and dancing in the breeze.\r\n"
+                "I wandered lonely as a cloud  "+Environment.NewLine +
+                "That floats on high o'er vales and hills,  "+Environment.NewLine +
+                "When all at once I saw a crowd,  "+Environment.NewLine +
+                "A host, of golden daffodils;  "+Environment.NewLine +
+                "Beside the lake, beneath the trees,  "+Environment.NewLine +
+                "Fluttering and dancing in the breeze."+Environment.NewLine
                 ,
                 "<p>I wandered lonely as a cloud<br />\n" +
                 "That floats on high o'er vales and hills,<br />\n" +
@@ -77,13 +79,13 @@ namespace UnitTests.MarkdownLog
             var paragraph = new Paragraph("Unix style:\n" +
                                           "ZX Spectrum style:\r" +
                                           "Acorn BBC Spooled output:\n\r" +
-                                          "Windows style:\r\n");
+                                          "Windows style:"+Environment.NewLine);
 
             paragraph.AssertOutputEquals(
-                "Unix style:  \r\n" +
-                "ZX Spectrum style:  \r\n" +
-                "Acorn BBC Spooled output:  \r\n" +
-                "Windows style:\r\n"
+                "Unix style:  "+Environment.NewLine +
+                "ZX Spectrum style:  "+Environment.NewLine +
+                "Acorn BBC Spooled output:  "+Environment.NewLine +
+                "Windows style:"+Environment.NewLine
                 ,
                 "<p>Unix style:<br />\n" +
                 "ZX Spectrum style:<br />\n" +

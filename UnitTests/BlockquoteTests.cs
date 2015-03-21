@@ -1,5 +1,7 @@
 using MarkdownLog;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TestClass = NUnit.Framework.TestFixtureAttribute;
+using TestMethod = NUnit.Framework.TestAttribute;
+using System;
 
 namespace UnitTests.MarkdownLog
 {
@@ -13,7 +15,7 @@ namespace UnitTests.MarkdownLog
             blockQuote.Append("We are what we repeatedly do. Excellence, therefore, is not an act but a habit.");
 
             blockQuote.AssertOutputEquals(
-                "> We are what we repeatedly do. Excellence, therefore, is not an act but a habit.\r\n"
+                "> We are what we repeatedly do. Excellence, therefore, is not an act but a habit."+Environment.NewLine
                 ,
                 "<blockquote>\n" +
                 "<p>We are what we repeatedly do. Excellence, therefore, is not an act but a habit.</p>\n" +
