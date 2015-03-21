@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using MarkdownLog;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TestClass = NUnit.Framework.TestFixtureAttribute;
+using TestMethod = NUnit.Framework.TestAttribute;
+using NUnit.Framework;
 
 namespace UnitTests.MarkdownLog
 {

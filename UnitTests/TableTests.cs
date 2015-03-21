@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using MarkdownLog;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TestClass = NUnit.Framework.TestFixtureAttribute;
+using TestMethod = NUnit.Framework.TestAttribute;
 
 namespace UnitTests.MarkdownLog
 {
@@ -58,11 +59,11 @@ namespace UnitTests.MarkdownLog
             };
 
             table.AssertOutputEquals(
-                "     Year | Album                    | Song Count | Rating   \r\n" +
-                "     ---- | ------------------------ | ---------- | --------- \r\n" +
-                "     1991 | Out of Time              | 11         | * * * *  \r\n" +
-                "     1992 | Automatic for the People | 12         | * * * * *\r\n" +
-                "     1994 | Monster                  | 12         | * * *    \r\n"
+                "     Year | Album                    | Song Count | Rating   "+Environment.NewLine +
+                "     ---- | ------------------------ | ---------- | --------- "+Environment.NewLine +
+                "     1991 | Out of Time              | 11         | * * * *  "+Environment.NewLine +
+                "     1992 | Automatic for the People | 12         | * * * * *"+Environment.NewLine +
+                "     1994 | Monster                  | 12         | * * *    "+Environment.NewLine
                 ,
                 "<table>\n" +
                 "<thead>\n" +
@@ -134,11 +135,11 @@ namespace UnitTests.MarkdownLog
             };
 
             table.AssertOutputEquals(
-                "     A            | B    | C             \r\n" +
-                "     ------------ | ---- | -------------- \r\n" +
-                "     Avatar       | 2009 | $2,782,275,172\r\n" +
-                "     Titanic      | 1997 | $2,186,772,302\r\n" +
-                "     The Avengers | 2012 | $1,518,594,910\r\n");
+                "     A            | B    | C             "+Environment.NewLine +
+                "     ------------ | ---- | -------------- "+Environment.NewLine +
+                "     Avatar       | 2009 | $2,782,275,172"+Environment.NewLine +
+                "     Titanic      | 1997 | $2,186,772,302"+Environment.NewLine +
+                "     The Avengers | 2012 | $1,518,594,910"+Environment.NewLine);
         }
 
 
@@ -186,11 +187,11 @@ namespace UnitTests.MarkdownLog
             };
 
             table.AssertOutputEquals(
-                "     Animal   | Good Pet? | Lifespan (years)\r\n" +
-                "    :-------- |:---------:| ----------------:\r\n" +
-                "     Cat      |    [X]    |               14\r\n" +
-                "     Mouse    |    [X]    |                2\r\n" +
-                "     Elephant |    [ ]    |               65\r\n");
+                "     Animal   | Good Pet? | Lifespan (years)"+Environment.NewLine +
+                "    :-------- |:---------:| ----------------:"+Environment.NewLine +
+                "     Cat      |    [X]    |               14"+Environment.NewLine +
+                "     Mouse    |    [X]    |                2"+Environment.NewLine +
+                "     Elephant |    [ ]    |               65"+Environment.NewLine);
         }
 
         [TestMethod]
@@ -208,14 +209,14 @@ namespace UnitTests.MarkdownLog
             };
 
             data.ToMarkdownTable().AssertOutputEquals(
-                "     Name              | Nominations | Awards\r\n" +
-                "     ----------------- | -----------:| ------:\r\n" +
-                "     Meryl Streep      |          18 |      3\r\n" +
-                "     Katharine Hepburn |          12 |      4\r\n" +
-                "     Jack Nicholson    |          12 |      3\r\n" +
-                "     Bette Davis       |          10 |      2\r\n" +
-                "     Laurence Olivier  |          10 |      1\r\n" +
-                "     Spencer Tracy     |           9 |      2\r\n");
+                "     Name              | Nominations | Awards"+Environment.NewLine +
+                "     ----------------- | -----------:| ------:"+Environment.NewLine +
+                "     Meryl Streep      |          18 |      3"+Environment.NewLine +
+                "     Katharine Hepburn |          12 |      4"+Environment.NewLine +
+                "     Jack Nicholson    |          12 |      3"+Environment.NewLine +
+                "     Bette Davis       |          10 |      2"+Environment.NewLine +
+                "     Laurence Olivier  |          10 |      1"+Environment.NewLine +
+                "     Spencer Tracy     |           9 |      2"+Environment.NewLine);
         }
 
         [TestMethod]
@@ -243,14 +244,14 @@ namespace UnitTests.MarkdownLog
             };
 
             data.ToMarkdownTable().AssertOutputEquals(
-                "     Key                | Value\r\n" +
-                "     ------------------ | -----:\r\n" +
-                "     Pi                 |  3.14\r\n" +
-                "     Blank              |      \r\n" +
-                "     Null               |      \r\n" +
-                "     e                  |  2.72\r\n" +
-                "     sqrt(2)            |  1.41\r\n" +
-                "     Gelford's constant | 23.14\r\n");
+                "     Key                | Value"+Environment.NewLine +
+                "     ------------------ | -----:"+Environment.NewLine +
+                "     Pi                 |  3.14"+Environment.NewLine +
+                "     Blank              |      "+Environment.NewLine +
+                "     Null               |      "+Environment.NewLine +
+                "     e                  |  2.72"+Environment.NewLine +
+                "     sqrt(2)            |  1.41"+Environment.NewLine +
+                "     Gelford's constant | 23.14"+Environment.NewLine);
         }
 
         [TestMethod]

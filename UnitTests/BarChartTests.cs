@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using MarkdownLog;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TestClass = NUnit.Framework.TestFixtureAttribute;
+using TestMethod = NUnit.Framework.TestAttribute;
 
 namespace UnitTests.MarkdownLog
 {
@@ -29,15 +30,15 @@ namespace UnitTests.MarkdownLog
             };
 
             chart.AssertOutputEquals(
-                "    Brazil    |#####  5\r\n" +
-                "    Italy     |####  4\r\n" +
-                "    Germany   |###  3\r\n" +
-                "    Argentina |##  2\r\n" +
-                "    Uruguay   |##  2\r\n" +
-                "    France    |#  1\r\n" +
-                "    Spain     |#  1\r\n" +
-                "    England   |#  1\r\n" +
-                "              ------\r\n"
+                "    Brazil    |#####  5"+Environment.NewLine +
+                "    Italy     |####  4"+Environment.NewLine +
+                "    Germany   |###  3"+Environment.NewLine +
+                "    Argentina |##  2" +Environment.NewLine+
+                "    Uruguay   |##  2" +Environment.NewLine+
+                "    France    |#  1" +Environment.NewLine+
+                "    Spain     |#  1" +Environment.NewLine+
+                "    England   |#  1" +Environment.NewLine+
+                "              ------"+Environment.NewLine
                 ,
                 "<pre><code>Brazil    |#####  5\n" +
                 "Italy     |####  4\n" +
@@ -197,8 +198,8 @@ namespace UnitTests.MarkdownLog
             }};
 
             chart.AssertOutputEquals(
-                "    \\tLine1\\rLine2 |##########  10\r\n" +
-                "                   -----------\r\n",
+                "    \\tLine1\\rLine2 |##########  10"+Environment.NewLine +
+                "                   -----------"+Environment.NewLine,
                 "<pre><code>\\tLine1\\rLine2 |##########  10\n" +
                 "               -----------\n" +
                 "</code></pre>\n\n");

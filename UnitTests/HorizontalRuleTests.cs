@@ -1,5 +1,7 @@
 using MarkdownLog;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TestClass = NUnit.Framework.TestFixtureAttribute;
+using TestMethod = NUnit.Framework.TestAttribute;
+using System;
 
 namespace UnitTests.MarkdownLog
 {
@@ -12,7 +14,7 @@ namespace UnitTests.MarkdownLog
             var rule = new HorizontalRule();
 
             rule.AssertOutputEquals(
-                "--------------------------------------------------------------------------------\r\n"
+                "--------------------------------------------------------------------------------"+Environment.NewLine
                 ,
                 "<hr />\n");
         }

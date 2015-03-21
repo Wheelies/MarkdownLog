@@ -1,5 +1,7 @@
 ﻿using MarkdownLog;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TestClass = NUnit.Framework.TestFixtureAttribute;
+using TestMethod = NUnit.Framework.TestAttribute;
+using System;
 
 namespace UnitTests.MarkdownLog
 {
@@ -26,8 +28,8 @@ namespace UnitTests.MarkdownLog
         public void TestLineBreaksWillProduceMultipleHeaders()
         {
             var header = new Header(
-                "Frankenstein;\r\n" +
-                "or,\r\n" +
+                "Frankenstein;"+Environment.NewLine +
+                "or,"+Environment.NewLine +
                 "The Modern Prometheus");
 
             header.WriteToTrace();

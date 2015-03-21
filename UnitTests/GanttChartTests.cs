@@ -1,6 +1,8 @@
 ﻿using MarkdownLog;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
+using TestClass = NUnit.Framework.TestFixtureAttribute;
+using TestMethod = NUnit.Framework.TestAttribute;
+using NUnit.Framework;
+using System;
 namespace UnitTests.MarkdownLog
 {
     [TestClass]
@@ -25,24 +27,24 @@ namespace UnitTests.MarkdownLog
             };
 
             chart.AssertOutputEquals(
-                "    Boil Kettle       |=====                       0 ->  5  (5)\r\n" +
-                "    Find Mugs         | ==                         1 ->  3  (2)\r\n" +
-                "    Add Tea Bag       |   =                        3 ->  4  (1)\r\n" +
-                "    Pour Water in Mug |     =                      5 ->  6  (1)\r\n" +
-                "    Add Milk          |        =                   8 ->  9  (1)\r\n" +
-                "    Remove Tea Bag    |         =                  9 -> 10  (1)\r\n" +
-                "    Drink Tea         |               ==========  15 -> 25 (10)\r\n" +
-                "                      --------------------------\r\n"
+                "    Boil Kettle       |=====                       0 ->  5  (5)" +Environment.NewLine+
+                "    Find Mugs         | ==                         1 ->  3  (2)" +Environment.NewLine+
+                "    Add Tea Bag       |   =                        3 ->  4  (1)" +Environment.NewLine+
+                "    Pour Water in Mug |     =                      5 ->  6  (1)" +Environment.NewLine+
+                "    Add Milk          |        =                   8 ->  9  (1)" +Environment.NewLine+
+                "    Remove Tea Bag    |         =                  9 -> 10  (1)" +Environment.NewLine+
+                "    Drink Tea         |               ==========  15 -> 25 (10)" +Environment.NewLine+
+                "                      --------------------------"+Environment.NewLine
                 ,
-                "<pre><code>Boil Kettle       |=====                       0 -&gt;  5  (5)\n" +
-                "Find Mugs         | ==                         1 -&gt;  3  (2)\n" +
-                "Add Tea Bag       |   =                        3 -&gt;  4  (1)\n" +
-                "Pour Water in Mug |     =                      5 -&gt;  6  (1)\n" +
-                "Add Milk          |        =                   8 -&gt;  9  (1)\n" +
-                "Remove Tea Bag    |         =                  9 -&gt; 10  (1)\n" +
-                "Drink Tea         |               ==========  15 -&gt; 25 (10)\n" +
-                "                  --------------------------\n" +
-                "</code></pre>\n\n");
+                "<pre><code>Boil Kettle       |=====                       0 -&gt;  5  (5)"+Environment.NewLine +
+                "Find Mugs         | ==                         1 -&gt;  3  (2)"+Environment.NewLine +
+                "Add Tea Bag       |   =                        3 -&gt;  4  (1)"+Environment.NewLine +
+                "Pour Water in Mug |     =                      5 -&gt;  6  (1)"+Environment.NewLine +
+                "Add Milk          |        =                   8 -&gt;  9  (1)"+Environment.NewLine +
+                "Remove Tea Bag    |         =                  9 -&gt; 10  (1)"+Environment.NewLine +
+                "Drink Tea         |               ==========  15 -&gt; 25 (10)"+Environment.NewLine +
+                "                  --------------------------"+Environment.NewLine +
+                "</code></pre>"+Environment.NewLine+Environment.NewLine);
         }
 
         [TestMethod]
@@ -65,11 +67,11 @@ namespace UnitTests.MarkdownLog
             };
 
             chart.AssertOutputEquals(
-                "    Backwards Activity |   ======  9 -> 3 (6)\r\n" +
-                "                       ----------\r\n",
-                "<pre><code>Backwards Activity |   ======  9 -&gt; 3 (6)\n" +
-                "                   ----------\n" +
-                "</code></pre>\n\n");
+                "    Backwards Activity |   ======  9 -> 3 (6)"+Environment.NewLine +
+                "                       ----------"+Environment.NewLine,
+                "<pre><code>Backwards Activity |   ======  9 -&gt; 3 (6)"+Environment.NewLine +
+                "                   ----------" +Environment.NewLine+
+                "</code></pre>"+Environment.NewLine+Environment.NewLine);
         }
 
         [TestMethod]
@@ -126,19 +128,19 @@ namespace UnitTests.MarkdownLog
             };
 
             chart.AssertOutputEquals(
-                "    Both Negative            ==== |     -5 -> -1 (4)\r\n" +
-                "    Negative (zero length)    +   |     -4 -> -4 (0)\r\n" +
-                "    Negative to Zero          ====|     -4 ->  0 (4)\r\n" +
-                "    Negative to Positive       ===|==   -3 ->  2 (5)\r\n" +
-                "    Zero to Positive              |===   0 ->  3 (3)\r\n" +
-                "    Zero to Zero                  +      0 ->  0 (0)\r\n" +
-                "    Both Positive                 | ==   1 ->  3 (2)\r\n" +
-                "    Both Negative (inverted) ==== |     -1 -> -5 (4)\r\n" +
-                "    Zero to Negative          ====|      0 -> -4 (4)\r\n" +
-                "    Positive to Negative       ===|==    2 -> -3 (5)\r\n" +
-                "    Positive to Zero              |===   3 ->  0 (3)\r\n" +
-                "    Both Positive (inverted)      | ==   3 ->  1 (2)\r\n" +
-                "                             ---------\r\n",
+                "    Both Negative            ==== |     -5 -> -1 (4)"+Environment.NewLine +
+                "    Negative (zero length)    +   |     -4 -> -4 (0)"+Environment.NewLine +
+                "    Negative to Zero          ====|     -4 ->  0 (4)"+Environment.NewLine +
+                "    Negative to Positive       ===|==   -3 ->  2 (5)"+Environment.NewLine +
+                "    Zero to Positive              |===   0 ->  3 (3)"+Environment.NewLine +
+                "    Zero to Zero                  +      0 ->  0 (0)"+Environment.NewLine +
+                "    Both Positive                 | ==   1 ->  3 (2)"+Environment.NewLine +
+                "    Both Negative (inverted) ==== |     -1 -> -5 (4)"+Environment.NewLine +
+                "    Zero to Negative          ====|      0 -> -4 (4)"+Environment.NewLine +
+                "    Positive to Negative       ===|==    2 -> -3 (5)"+Environment.NewLine +
+                "    Positive to Zero              |===   3 ->  0 (3)"+Environment.NewLine +
+                "    Both Positive (inverted)      | ==   3 ->  1 (2)"+Environment.NewLine +
+                "                             ---------"+Environment.NewLine,
                 "<pre><code>Both Negative            ==== |     -5 -&gt; -1 (4)\n" +
                 "Negative (zero length)    +   |     -4 -&gt; -4 (0)\n" +
                 "Negative to Zero          ====|     -4 -&gt;  0 (4)\n" +
@@ -182,22 +184,22 @@ namespace UnitTests.MarkdownLog
             };
 
             chart.AssertOutputEquals(
-                "    Site Preparation | =====                                                          1 ->  10  (9)\r\n" +
-                "    Dig Trenches     |       ==                                                      12 ->  16  (4)\r\n" +
-                "    Drains           |         ===                                                   16 ->  22  (6)\r\n" +
-                "    Foundations      |             ====                                              24 ->  30  (6)\r\n" +
-                "    Brickwork        |                 =============                                 30 ->  54 (24)\r\n" +
-                "    Roof Timber      |                              ===                              54 ->  60  (6)\r\n" +
-                "    Partitions       |                              ===                              54 ->  60  (6)\r\n" +
-                "    Frames           |                              ======                           54 ->  64 (10)\r\n" +
-                "    Roof Tiling      |                                 =======                       60 ->  72 (12)\r\n" +
-                "    First Fix        |                                        ======                 72 ->  82 (10)\r\n" +
-                "    Glazing          |                                 ====                          60 ->  66  (6)\r\n" +
-                "    Plaster          |                                      ======                   68 ->  80 (12)\r\n" +
-                "    Second Fix       |                                            =======            80 ->  92 (12)\r\n" +
-                "    Interior Finish  |                                                 =======       88 -> 100 (12)\r\n" +
-                "    Cleanup          |                                                        ====  100 -> 108  (8)\r\n" +
-                "                     -------------------------------------------------------------\r\n",
+                "    Site Preparation | =====                                                          1 ->  10  (9)"+Environment.NewLine +
+                "    Dig Trenches     |       ==                                                      12 ->  16  (4)"+Environment.NewLine +  
+                "    Drains           |         ===                                                   16 ->  22  (6)"+Environment.NewLine +
+                "    Foundations      |             ====                                              24 ->  30  (6)"+Environment.NewLine +
+                "    Brickwork        |                 =============                                 30 ->  54 (24)"+Environment.NewLine +
+                "    Roof Timber      |                              ===                              54 ->  60  (6)"+Environment.NewLine +
+                "    Partitions       |                              ===                              54 ->  60  (6)"+Environment.NewLine +
+                "    Frames           |                              ======                           54 ->  64 (10)"+Environment.NewLine +
+                "    Roof Tiling      |                                 =======                       60 ->  72 (12)"+Environment.NewLine +
+                "    First Fix        |                                        ======                 72 ->  82 (10)"+Environment.NewLine +
+                "    Glazing          |                                 ====                          60 ->  66  (6)"+Environment.NewLine +
+                "    Plaster          |                                      ======                   68 ->  80 (12)"+Environment.NewLine +
+                "    Second Fix       |                                            =======            80 ->  92 (12)"+Environment.NewLine +
+                "    Interior Finish  |                                                 =======       88 -> 100 (12)"+Environment.NewLine +
+                "    Cleanup          |                                                        ====  100 -> 108  (8)"+Environment.NewLine +
+                "                     -------------------------------------------------------------"+Environment.NewLine,
                 "<pre><code>Site Preparation | =====                                                          1 -&gt;  10  (9)\n" +
                 "Dig Trenches     |       ==                                                      12 -&gt;  16  (4)\n" +
                 "Drains           |         ===                                                   16 -&gt;  22  (6)\n" +
@@ -234,10 +236,10 @@ namespace UnitTests.MarkdownLog
             };
 
             chart.AssertOutputEquals(
-                "    Fetch HTML   |=      0 -> 1.2 (1.2)\r\n" +
-                "    Fetch Images |==     0 -> 1.8 (1.8)\r\n" +
-                "    Render Page  | ==  1.2 -> 3.6 (2.4)\r\n" +
-                "                 ----\r\n",
+                "    Fetch HTML   |=      0 -> 1.2 (1.2)"+Environment.NewLine +
+                "    Fetch Images |==     0 -> 1.8 (1.8)"+Environment.NewLine +
+                "    Render Page  | ==  1.2 -> 3.6 (2.4)"+Environment.NewLine +
+                "                 ----"+Environment.NewLine,
                 "<pre><code>Fetch HTML   |=      0 -&gt; 1.2 (1.2)\n" +
                 "Fetch Images |==     0 -&gt; 1.8 (1.8)\n" +
                 "Render Page  | ==  1.2 -&gt; 3.6 (2.4)\n" +
@@ -265,14 +267,14 @@ namespace UnitTests.MarkdownLog
             };
 
             chart.AssertOutputEquals(
-                "    v1.0 Release Date      +         |                      -10 -> -10 (0)\r\n" +
-                "    Today                            +                        0 ->   0 (0)\r\n" +
-                "    Feasibility Study                |=====                   0 ->   5 (5)\r\n" +
-                "    Requirements Gathering           |    ======              4 ->  10 (6)\r\n" +
-                "    Development                      |        =======         8 ->  15 (7)\r\n" +
-                "    Testing                          |           =======     11 ->  18 (7)\r\n" +
-                "    v2.0 Release Date                |                   +   20 ->  20 (0)\r\n" +
-                "                           -------------------------------\r\n",
+                "    v1.0 Release Date      +         |                      -10 -> -10 (0)"+Environment.NewLine +
+                "    Today                            +                        0 ->   0 (0)"+Environment.NewLine +
+                "    Feasibility Study                |=====                   0 ->   5 (5)"+Environment.NewLine +
+                "    Requirements Gathering           |    ======              4 ->  10 (6)"+Environment.NewLine +
+                "    Development                      |        =======         8 ->  15 (7)"+Environment.NewLine +
+                "    Testing                          |           =======     11 ->  18 (7)"+Environment.NewLine +
+                "    v2.0 Release Date                |                   +   20 ->  20 (0)"+Environment.NewLine +
+                "                           -------------------------------"+Environment.NewLine,
                 "<pre><code>v1.0 Release Date      +         |                      -10 -&gt; -10 (0)\n" +
                 "Today                            +                        0 -&gt;   0 (0)\n" +
                 "Feasibility Study                |=====                   0 -&gt;   5 (5)\n" +

@@ -1,5 +1,7 @@
 using MarkdownLog;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TestClass = NUnit.Framework.TestFixtureAttribute;
+using TestMethod = NUnit.Framework.TestAttribute;
+using System;
 
 namespace UnitTests.MarkdownLog
 {
@@ -17,11 +19,11 @@ namespace UnitTests.MarkdownLog
                 "Plum");
             
             list.AssertOutputEquals(
-                "   * Apple\r\n" +
-                "   * Orange\r\n" +
-                "   * Banana\r\n" +
-                "   * Kiwi\r\n" +
-                "   * Plum\r\n"
+                "   * Apple"+Environment.NewLine +
+                "   * Orange"+Environment.NewLine +
+                "   * Banana"+Environment.NewLine +
+                "   * Kiwi"+Environment.NewLine +
+                "   * Plum"+Environment.NewLine
                 ,
                 "<ul>\n" +
                 "<li>Apple</li>\n" +
@@ -43,11 +45,11 @@ namespace UnitTests.MarkdownLog
                 "Elton John");
 
             list.AssertOutputEquals(
-                "   1. The Beatles\r\n" +
-                "   2. Elvis Presley\r\n" +
-                "   3. Michael Jackson\r\n" +
-                "   4. Madonna\r\n" +
-                "   5. Elton John\r\n"
+                "   1. The Beatles"+Environment.NewLine +
+                "   2. Elvis Presley"+Environment.NewLine +
+                "   3. Michael Jackson"+Environment.NewLine +
+                "   4. Madonna"+Environment.NewLine +
+                "   5. Elton John"+Environment.NewLine
                 ,
                 "<ol>\n" +
                 "<li>The Beatles</li>\n" +
