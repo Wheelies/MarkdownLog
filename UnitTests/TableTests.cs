@@ -5,12 +5,21 @@ using System.Linq;
 using MarkdownLog;
 using TestClass = NUnit.Framework.TestFixtureAttribute;
 using TestMethod = NUnit.Framework.TestAttribute;
+using NUnit.Framework;
+using System.Threading;
+using System.Globalization;
 
 namespace UnitTests.MarkdownLog
 {
     [TestClass]
     public class TableTests
     {
+        [TestFixtureSetUp]
+        public void TestFixtureSetUp()
+        {
+            Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
+        }
+
         [TestMethod]
         public void TestCanProduceTable()
         {
