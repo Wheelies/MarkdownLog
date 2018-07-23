@@ -1,31 +1,3 @@
-﻿using System.Resources;
-using System.Reflection;
+﻿using System.Runtime.CompilerServices;
 
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
-using System.Runtime.CompilerServices;
-
-[assembly: AssemblyTitle("MarkdownLog")]
-[assembly: AssemblyDescription("A lightweight portable class library (PCL) for producing Markdown elements programmatically")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("BlackJet Software Ltd")]
-[assembly: AssemblyProduct("MarkdownLog")]
-[assembly: AssemblyCopyright("Copyright © BlackJet Software Ltd  2014")]
-[assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]
-[assembly: NeutralResourcesLanguage("en")]
-
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Build and Revision Numbers 
-// by using the '*' as shown below:
-// [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: InternalsVisibleTo("UnitTests.MarkdownLog")]
+[assembly: InternalsVisibleTo("MarkdownLog.Tests, PublicKey=0024000004800000940000000602000000240000525341310004000001000100911cf1ef9ef937f2eb2da1bdc6fdb7f4eff0f9353c60bd0b3721aab344cafb69783d58443c29e68b7afe7740f8747127a8d5eb61abf74d71b290c068de0a868ab32b2563622608bb86cda358b49b6e91017a26631089894de4e1808a6f17413cb3811fcf5d75e95c524842a5808f97f25b41f039aa74ed7700fb6413eb5643c8")]
