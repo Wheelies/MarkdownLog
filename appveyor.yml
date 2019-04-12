@@ -21,13 +21,3 @@ after_test:
 
 artifacts:
   - path: 'MarkdownLog/bin/Release/*.nupkg'
-
-deploy:
- provider: NuGet
- api_key:
-   secure: n/2gZwCGLcoLBr5nGu5akS0IFQ1YHciI6Wz0NGC+1mLTUtO08Uy+TWn7OtyLG9v3
- artifact: /.*\.nupkg/
-  
-  
-  
-  
