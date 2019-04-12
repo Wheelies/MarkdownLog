@@ -1,5 +1,5 @@
 #last number in version automatically set by AppVeyor
-version: 0.9.0
+version: 0.9.{build}
 
 clone_depth: 1
 pull_requests:
@@ -17,7 +17,7 @@ build:
 test: auto
 
 after_test:
-  - cmd: dotnet pack MarkdownLog/ -c Release
+  - cmd: dotnet pack MarkdownLog\ -c Release
 
 artifacts:
-  - path: 'MarkdownLog/bin/Release/*.nupkg'
+  - path: 'MarkdownLog\bin\Release\*.nupkg'
