@@ -4,7 +4,7 @@
     <AssemblyName>MarkdownLog</AssemblyName>
     <RootNamespace>MarkdownLog</RootNamespace>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>0.10.0</Version>
+    <Version>0.9.0</Version>
     <Authors>wheelies</Authors>
     <PackageLicenseUrl>https://github.com/Wheelies/MarkdownLog/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/Wheelies/MarkdownLog</PackageProjectUrl>
@@ -14,6 +14,8 @@
     <IsPackable>true</IsPackable>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>..\MarkdownLog.snk</AssemblyOriginatorKeyFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
 </Project>
