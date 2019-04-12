@@ -1,17 +1,10 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27920.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkdownLog", "MarkdownLog\MarkdownLog.csproj", "{58003E79-47E0-47D6-BF62-82051EFC1E8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{115E4845-076E-4615-9FA1-2FFEBE4D6042}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D7A77F88-1662-4B5E-8D9B-6FD119DD9787}"
-	ProjectSection(SolutionItems) = preProject
-		appveyor.yml = appveyor.yml
-		NuGet\MarkdownLog.nuspec = NuGet\MarkdownLog.nuspec
-		NuGet\pack.ps1 = NuGet\pack.ps1
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkdownLog.Tests", "UnitTests\MarkdownLog.Tests.csproj", "{115E4845-076E-4615-9FA1-2FFEBE4D6042}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +23,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FBF00EA3-31F1-41FA-8576-E264D75F910F}
 	EndGlobalSection
 EndGlobal

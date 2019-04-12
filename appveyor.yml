@@ -1,35 +1,32 @@
-version: 0.9.3.{build}
+#version should be changed with any pull requests
+version: 0.10.0
+
+clone_depth: 1
+pull_requests:
+  do_not_increment_build_number: true
 
 branches:
   only:
     - master
-
-assembly_info:
-  patch: true
-  file: AssemblyInfo.*
-  assembly_version: "{version}"
-  assembly_file_version: "{version}"
-  assembly_informational_version: "{version}"
 
 configuration: Release
 
 build:
   project: MarkdownLog.sln
 
+test: auto
+
 after_test:
-  - ps: .\nuget\pack.ps1
+  - cmd: dotnet pack MarkdownLog/ -c Release
 
 artifacts:
-  - path: MarkdownLog\bin\Release\MarkdownLog.dll
-    name: MarkdownLog.dll
-  - path: '**\*.nupkg'
+  - path: 'MarkdownLog/bin/Release/*.nupkg'
 
-#uncomment to publish to NuGet
-#deploy:
-#  provider: NuGet
-#  api_key:
-#    secure: n/2gZwCGLcoLBr5nGu5akS0IFQ1YHciI6Wz0NGC+1mLTUtO08Uy+TWn7OtyLG9v3
-#  artifact: /.*\.nupkg/
+deploy:
+ provider: NuGet
+ api_key:
+   secure: n/2gZwCGLcoLBr5nGu5akS0IFQ1YHciI6Wz0NGC+1mLTUtO08Uy+TWn7OtyLG9v3
+ artifact: /.*\.nupkg/
   
   
   
