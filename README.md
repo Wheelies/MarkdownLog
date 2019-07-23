@@ -206,4 +206,4 @@ Lolita, light of my life, fire of my loins. My sin, my soul. Lo-lee-ta: the tip 
 
 ---
 
-MarkdownLog is developed and maintained by [BlackJet Software](http://blackjetsoftware.com). It was initially designed for use in [iOS app Shopping UK](http://shoppingukapp.com/) to assist with performance and smoke testing, and released as open-source in 2014.
+MarkdownLog is developed and maintained by [BlackJet Software](http://blackjetsoftware.com). It was initially designed for use in [iOS app "Shopping UK"](http://shoppingukapp.com/) to assist with performance and smoke testing. It was released as open-source in 2014.
