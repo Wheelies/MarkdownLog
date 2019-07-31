@@ -133,6 +133,11 @@ namespace UnitTests.MarkdownLog
         {
             Console.Write("The Origin of the Species".ToMarkdownHeader());
             Console.Write("By Means of Natural Selection".ToMarkdownSubHeader());
+
+			for (int headerLevel = 1; headerLevel <= 6; headerLevel++)
+			{
+				Console.Write(("This should be a header " + headerLevel).ToMarkdownHeader(headerLevel));
+			}
         }
 
         [TestMethod]
